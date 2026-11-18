@@ -855,4 +855,61 @@
   <data name="RotatePermissionHint" xml:space="preserve">
     <value>Zum Rotieren ist die Schlüsselberechtigung 'rotate' (oder die Rolle Key Vault Crypto Officer) erforderlich.</value>
   </data>
+  <data name="NewCertificateButton.Text" xml:space="preserve">
+    <value>Zertifikat..</value>
+  </data>
+  <data name="NewCertificateWindowTitle" xml:space="preserve">
+    <value>Neues Zertifikat</value>
+  </data>
+  <data name="NewCertificateTitle.Text" xml:space="preserve">
+    <value>Zertifikat erstellen oder importieren</value>
+  </data>
+  <data name="CertificateGenerateMode.Content" xml:space="preserve">
+    <value>Generieren (selbstsigniert)</value>
+  </data>
+  <data name="CertificateImportMode.Content" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="CertificateNameTextBlock.Text" xml:space="preserve">
+    <value>Zertifikatname</value>
+  </data>
+  <data name="CertificateSubjectTextBlock.Text" xml:space="preserve">
+    <value>Antragsteller</value>
+  </data>
+  <data name="CertificateDnsNamesTextBlock.Text" xml:space="preserve">
+    <value>DNS-Namen (optional, durch Kommas getrennt)</value>
+  </data>
+  <data name="CertificateValidityTextBlock.Text" xml:space="preserve">
+    <value>Gültigkeit (Monate)</value>
+  </data>
+  <data name="CertificateContentTypeTextBlock.Text" xml:space="preserve">
+    <value>Inhaltstyp</value>
+  </data>
+  <data name="CertificateExportableCheckBox.Content" xml:space="preserve">
+    <value>Exportierbarer privater Schlüssel</value>
+  </data>
+  <data name="CertificateAutoRenewCheckBox.Content" xml:space="preserve">
+    <value>Automatisch bei 80 % der Laufzeit erneuern</value>
+  </data>
+  <data name="CertificateFileTextBlock.Text" xml:space="preserve">
+    <value>Zertifikatdatei (.pfx, .p12 oder .pem mit privatem Schlüssel)</value>
+  </data>
+  <data name="BrowseButton.Content" xml:space="preserve">
+    <value>Durchsuchen..</value>
+  </data>
+  <data name="CertificatePasswordTextBlock.Text" xml:space="preserve">
+    <value>Kennwort (falls die Datei geschützt ist)</value>
+  </data>
+  <data name="CertificateSubjectRequiredMessage" xml:space="preserve">
+    <value>Geben Sie einen Antragsteller oder mindestens einen DNS-Namen an.</value>
+  </data>
+  <data name="CertificateValidityInvalidMessage" xml:space="preserve">
+    <value>Die Gültigkeit muss zwischen 1 und 1200 Monaten liegen.</value>
+  </data>
+  <data name="CertificateFileRequiredMessage" xml:space="preserve">
+    <value>Wählen Sie eine vorhandene Zertifikatdatei aus.</value>
+  </data>
+  <data name="CertificateCreatedMessage" xml:space="preserve">
+    <value>Das Zertifikat '{0}' wurde erstellt.</value>
+  </data>
 </root>

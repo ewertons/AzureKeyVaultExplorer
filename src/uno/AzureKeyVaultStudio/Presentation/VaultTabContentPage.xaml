@@ -58,7 +58,7 @@
                         <MenuFlyout Placement="Bottom">
                             <MenuFlyoutItem x:Uid="NewSecretButton" Command="{x:Bind ViewModel.NewSecretCommand, Mode=OneWay}" />
                             <MenuFlyoutItem x:Uid="NewKeyButton" Command="{x:Bind ViewModel.NewKeyCommand, Mode=OneWay}" />
-                            <MenuFlyoutItem IsEnabled="False" Text="Certificate.." />
+                            <MenuFlyoutItem x:Uid="NewCertificateButton" Command="{x:Bind ViewModel.NewCertificateCommand, Mode=OneWay}" />
                         </MenuFlyout>
                     </DropDownButton.Flyout>
                 </DropDownButton>

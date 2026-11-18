@@ -1,0 +1,175 @@
+<UserControl
+    x:Class="AzureKeyVaultStudio.UserControls.NewCertificateDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:AzureKeyVaultStudio.UserControls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="760"
+    d:DesignWidth="640"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" Padding="16,0">
+            <StackPanel
+                Margin="10"
+                Orientation="Vertical"
+                Spacing="10">
+                <TextBlock
+                    x:Uid="NewCertificateTitle"
+                    Margin="2,10,0,0"
+                    Style="{ThemeResource SubtitleTextBlockStyle}" />
+
+                <controls:Segmented HorizontalAlignment="Left" SelectedIndex="{x:Bind ViewModel.SelectedModeIndex, Mode=TwoWay}">
+                    <controls:SegmentedItem x:Uid="CertificateGenerateMode" />
+                    <controls:SegmentedItem x:Uid="CertificateImportMode" />
+                </controls:Segmented>
+
+                <InfoBar
+                    IsClosable="False"
+                    IsOpen="{x:Bind ViewModel.HasError, Mode=OneWay}"
+                    Message="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                    Severity="Error" />
+
+                <StackPanel Spacing="4">
+                    <TextBlock x:Uid="CertificateNameTextBlock" />
+                    <TextBox x:Uid="NewKeyNameTextBox" Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
+                </StackPanel>
+
+                <StackPanel Spacing="4">
+                    <TextBlock x:Uid="VaultLocationTextBlock" />
+                    <TextBox IsEnabled="False" Text="{x:Bind ViewModel.VaultUri}" />
+                </StackPanel>
+
+                <!--  Generate (self-signed)  -->
+                <StackPanel Spacing="10" Visibility="{x:Bind ViewModel.IsGenerateMode, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Uid="CertificateSubjectTextBlock" />
+                        <TextBox PlaceholderText="CN=contoso.com" Text="{x:Bind ViewModel.Subject, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Uid="CertificateDnsNamesTextBlock" />
+                        <TextBox PlaceholderText="contoso.com, www.contoso.com" Text="{x:Bind ViewModel.DnsNames, Mode=TwoWay}" />
+                    </StackPanel>
+                    <controls:WrapPanel HorizontalSpacing="16" VerticalSpacing="8">
+                        <StackPanel Spacing="4">
+                            <TextBlock x:Uid="CertificateValidityTextBlock" />
+                            <NumberBox
+                                MinWidth="120"
+                                Maximum="1200"
+                                Minimum="1"
+                                SpinButtonPlacementMode="Compact"
+                                Value="{x:Bind ViewModel.ValidityInMonths, Mode=TwoWay}" />
+                        </StackPanel>
+                        <StackPanel Spacing="4">
+                            <TextBlock x:Uid="KeyTypeTextBlock" />
+                            <ComboBox
+                                MinWidth="120"
+                                DisplayMemberPath="Label"
+                                ItemsSource="{x:Bind ViewModel.KeyKindOptions}"
+                                SelectedItem="{x:Bind ViewModel.SelectedKeyKind, Mode=TwoWay}" />
+                        </StackPanel>
+                        <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.IsRsa, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock x:Uid="KeySizeTextBlock" />
+                            <ComboBox
+                                MinWidth="110"
+                                ItemsSource="{x:Bind ViewModel.KeySizes}"
+                                SelectedItem="{x:Bind ViewModel.SelectedKeySize, Mode=TwoWay}" />
+                        </StackPanel>
+                        <StackPanel Spacing="4" Visibility="{x:Bind ViewModel.IsEc, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <TextBlock x:Uid="KeyCurveTextBlock" />
+                            <ComboBox
+                                MinWidth="110"
+                                ItemsSource="{x:Bind ViewModel.Curves}"
+                                SelectedItem="{x:Bind ViewModel.SelectedCurve, Mode=TwoWay}" />
+                        </StackPanel>
+                        <StackPanel Spacing="4">
+                            <TextBlock x:Uid="CertificateContentTypeTextBlock" />
+                            <ComboBox
+                                MinWidth="140"
+                                ItemsSource="{x:Bind ViewModel.ContentTypeOptions}"
+                                SelectedItem="{x:Bind ViewModel.SelectedContentType, Mode=TwoWay}" />
+                        </StackPanel>
+                    </controls:WrapPanel>
+                    <CheckBox x:Uid="CertificateExportableCheckBox" IsChecked="{x:Bind ViewModel.Exportable, Mode=TwoWay}" />
+                    <CheckBox x:Uid="CertificateAutoRenewCheckBox" IsChecked="{x:Bind ViewModel.AutoRenew, Mode=TwoWay}" />
+                </StackPanel>
+
+                <!--  Import  -->
+                <StackPanel Spacing="10" Visibility="{x:Bind ViewModel.IsImportMode, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Uid="CertificateFileTextBlock" />
+                        <Grid ColumnSpacing="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox PlaceholderText="C:\certs\contoso.pfx" Text="{x:Bind ViewModel.ImportFilePath, Mode=TwoWay}" />
+                            <Button
+                                x:Uid="BrowseButton"
+                                Grid.Column="1"
+                                Click="BrowseButton_Click" />
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Uid="CertificatePasswordTextBlock" />
+                        <PasswordBox Password="{x:Bind ViewModel.ImportPassword, Mode=TwoWay}" />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock x:Uid="EnabledTextBlock" VerticalAlignment="Center" />
+                    <ToggleSwitch
+                        x:Uid="EnabledToggleSwitch"
+                        VerticalAlignment="Center"
+                        IsOn="{x:Bind ViewModel.Enabled, Mode=TwoWay}" />
+                </StackPanel>
+
+                <local:TagsEditor EditableTags="{x:Bind ViewModel.EditableTags, Mode=OneWay}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Grid
+            Grid.Row="1"
+            MinHeight="80"
+            Padding="24,0"
+            VerticalAlignment="Bottom"
+            Background="{ThemeResource SolidBackgroundFillColorSecondaryBrush}"
+            BorderBrush="{ThemeResource DividerStrokeColorDefaultBrush}"
+            BorderThickness="0,1,0,0"
+            ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                HorizontalAlignment="Stretch"
+                Command="{x:Bind ViewModel.CreateCommand}"
+                Style="{ThemeResource AccentButtonStyle}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE710;" />
+                    <TextBlock x:Uid="NewItemSubmitButtonText" />
+                    <ProgressRing
+                        Width="14"
+                        Height="14"
+                        IsActive="{x:Bind ViewModel.CreateCommand.IsRunning, Mode=OneWay}" />
+                </StackPanel>
+            </Button>
+            <Button
+                Grid.Column="1"
+                HorizontalAlignment="Stretch"
+                Click="CancelButton_Click">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <FontIcon Glyph="&#xE711;" />
+                    <TextBlock x:Uid="CancelTextBlock" />
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -855,4 +855,61 @@
   <data name="RotatePermissionHint" xml:space="preserve">
     <value>La rotation nécessite l'autorisation de clé 'rotate' (ou le rôle Key Vault Crypto Officer).</value>
   </data>
+  <data name="NewCertificateButton.Text" xml:space="preserve">
+    <value>Certificat..</value>
+  </data>
+  <data name="NewCertificateWindowTitle" xml:space="preserve">
+    <value>Nouveau certificat</value>
+  </data>
+  <data name="NewCertificateTitle.Text" xml:space="preserve">
+    <value>Créer ou importer un certificat</value>
+  </data>
+  <data name="CertificateGenerateMode.Content" xml:space="preserve">
+    <value>Générer (auto-signé)</value>
+  </data>
+  <data name="CertificateImportMode.Content" xml:space="preserve">
+    <value>Importer</value>
+  </data>
+  <data name="CertificateNameTextBlock.Text" xml:space="preserve">
+    <value>Nom du certificat</value>
+  </data>
+  <data name="CertificateSubjectTextBlock.Text" xml:space="preserve">
+    <value>Objet</value>
+  </data>
+  <data name="CertificateDnsNamesTextBlock.Text" xml:space="preserve">
+    <value>Noms DNS (facultatif, séparés par des virgules)</value>
+  </data>
+  <data name="CertificateValidityTextBlock.Text" xml:space="preserve">
+    <value>Validité (mois)</value>
+  </data>
+  <data name="CertificateContentTypeTextBlock.Text" xml:space="preserve">
+    <value>Type de contenu</value>
+  </data>
+  <data name="CertificateExportableCheckBox.Content" xml:space="preserve">
+    <value>Clé privée exportable</value>
+  </data>
+  <data name="CertificateAutoRenewCheckBox.Content" xml:space="preserve">
+    <value>Renouveler automatiquement à 80 % de la durée de vie</value>
+  </data>
+  <data name="CertificateFileTextBlock.Text" xml:space="preserve">
+    <value>Fichier de certificat (.pfx, .p12 ou .pem avec clé privée)</value>
+  </data>
+  <data name="BrowseButton.Content" xml:space="preserve">
+    <value>Parcourir..</value>
+  </data>
+  <data name="CertificatePasswordTextBlock.Text" xml:space="preserve">
+    <value>Mot de passe (si le fichier est protégé)</value>
+  </data>
+  <data name="CertificateSubjectRequiredMessage" xml:space="preserve">
+    <value>Indiquez un objet ou au moins un nom DNS.</value>
+  </data>
+  <data name="CertificateValidityInvalidMessage" xml:space="preserve">
+    <value>La validité doit être comprise entre 1 et 1200 mois.</value>
+  </data>
+  <data name="CertificateFileRequiredMessage" xml:space="preserve">
+    <value>Sélectionnez un fichier de certificat existant.</value>
+  </data>
+  <data name="CertificateCreatedMessage" xml:space="preserve">
+    <value>Le certificat '{0}' a été créé.</value>
+  </data>
 </root>
