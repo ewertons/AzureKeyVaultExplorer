@@ -912,4 +912,127 @@
   <data name="CertificateCreatedMessage" xml:space="preserve">
     <value>The certificate '{0}' has been created.</value>
   </data>
+  <data name="NewVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>New key vault...</value>
+  </data>
+  <data name="DeletedVaultsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Deleted key vaults...</value>
+  </data>
+  <data name="DeleteVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Delete key vault</value>
+  </data>
+  <data name="NewVaultWindowTitle" xml:space="preserve">
+    <value>New Key Vault</value>
+  </data>
+  <data name="NewVaultTitle.Text" xml:space="preserve">
+    <value>Create Key Vault</value>
+  </data>
+  <data name="VaultSubscriptionTextBlock.Text" xml:space="preserve">
+    <value>Subscription</value>
+  </data>
+  <data name="VaultResourceGroupTextBlock.Text" xml:space="preserve">
+    <value>Resource group</value>
+  </data>
+  <data name="VaultNameTextBlock.Text" xml:space="preserve">
+    <value>Key vault name</value>
+  </data>
+  <data name="NewVaultNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>3-24 letters, digits and hyphens; globally unique</value>
+  </data>
+  <data name="VaultRegionTextBlock.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="VaultPricingTierTextBlock.Text" xml:space="preserve">
+    <value>Pricing tier</value>
+  </data>
+  <data name="VaultPermissionModelTextBlock.Text" xml:space="preserve">
+    <value>Permission model</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OnContent" xml:space="preserve">
+    <value>Azure role-based access control (recommended)</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OffContent" xml:space="preserve">
+    <value>Vault access policy</value>
+  </data>
+  <data name="VaultGrantAccessRbacText" xml:space="preserve">
+    <value>Assign me the Key Vault Administrator role</value>
+  </data>
+  <data name="VaultGrantAccessPolicyText" xml:space="preserve">
+    <value>Add an access policy with full permissions for me</value>
+  </data>
+  <data name="VaultRetentionNumberBox.Header" xml:space="preserve">
+    <value>Days to retain deleted vaults (7-90)</value>
+  </data>
+  <data name="VaultPurgeProtectionTextBlock.Text" xml:space="preserve">
+    <value>Purge protection</value>
+  </data>
+  <data name="VaultPurgeProtectionHint.Text" xml:space="preserve">
+    <value>Once enabled, purge protection cannot be turned off and deleted vaults and items cannot be purged until the retention period ends.</value>
+  </data>
+  <data name="VaultNameInvalid" xml:space="preserve">
+    <value>The vault name must be 3-24 characters, start with a letter, end with a letter or digit, and contain only letters, digits and single hyphens.</value>
+  </data>
+  <data name="VaultLocationRequired" xml:space="preserve">
+    <value>Select a region.</value>
+  </data>
+  <data name="VaultResourceGroupRequired" xml:space="preserve">
+    <value>Select a resource group.</value>
+  </data>
+  <data name="VaultRetentionInvalid" xml:space="preserve">
+    <value>Retention must be between 7 and 90 days.</value>
+  </data>
+  <data name="VaultNameUnavailable" xml:space="preserve">
+    <value>The name '{0}' is not available.</value>
+  </data>
+  <data name="VaultCreatePermissionHint" xml:space="preserve">
+    <value>Creating a vault requires the Contributor role (or Microsoft.KeyVault/vaults/write) on the resource group.</value>
+  </data>
+  <data name="VaultCreatedMessage" xml:space="preserve">
+    <value>Key vault '{0}' was created.</value>
+  </data>
+  <data name="VaultCreatedAccessWarning" xml:space="preserve">
+    <value>Key vault '{0}' was created, but granting you access failed. Assign yourself a role or access policy before using it.</value>
+  </data>
+  <data name="DeleteVaultConfirmTitle" xml:space="preserve">
+    <value>Delete key vault?</value>
+  </data>
+  <data name="DeleteVaultConfirmMessage" xml:space="preserve">
+    <value>Key vault '{0}' and everything in it will be soft-deleted. It can be recovered for {1} days from 'Deleted key vaults' on the subscription.</value>
+  </data>
+  <data name="VaultDeletedMessage" xml:space="preserve">
+    <value>Key vault '{0}' was deleted.</value>
+  </data>
+  <data name="VaultDeletePermissionHint" xml:space="preserve">
+    <value>Deleting a vault requires the Contributor role (or Microsoft.KeyVault/vaults/delete) on the vault.</value>
+  </data>
+  <data name="DeletedVaultsWindowTitle" xml:space="preserve">
+    <value>Deleted key vaults</value>
+  </data>
+  <data name="DeletedVaultsTitle.Text" xml:space="preserve">
+    <value>Deleted key vaults</value>
+  </data>
+  <data name="DeletedVaultsEmpty" xml:space="preserve">
+    <value>No deleted key vaults in this subscription.</value>
+  </data>
+  <data name="DeletedVaultsResourceGroupHeader.Text" xml:space="preserve">
+    <value>Resource group</value>
+  </data>
+  <data name="DeletedVaultsLocationHeader.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="VaultRecoveredMessage" xml:space="preserve">
+    <value>Key vault '{0}' was recovered.</value>
+  </data>
+  <data name="PurgeVaultConfirmTitle" xml:space="preserve">
+    <value>Permanently purge key vault?</value>
+  </data>
+  <data name="PurgeVaultConfirmMessage" xml:space="preserve">
+    <value>Key vault '{0}' and all its secrets, keys and certificates will be permanently destroyed. This cannot be undone.</value>
+  </data>
+  <data name="VaultPurgeStartedMessage" xml:space="preserve">
+    <value>Purge of key vault '{0}' started. It may take several minutes to complete.</value>
+  </data>
+  <data name="VaultPurgePermissionHint" xml:space="preserve">
+    <value>Purging a vault requires Microsoft.KeyVault/locations/deletedVaults/purge/action on the subscription.</value>
+  </data>
 </root>

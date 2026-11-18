@@ -912,4 +912,127 @@
   <data name="CertificateCreatedMessage" xml:space="preserve">
     <value>Se creó el certificado '{0}'.</value>
   </data>
+  <data name="NewVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Nuevo almacén de claves...</value>
+  </data>
+  <data name="DeletedVaultsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Almacenes de claves eliminados...</value>
+  </data>
+  <data name="DeleteVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Eliminar almacén de claves</value>
+  </data>
+  <data name="NewVaultWindowTitle" xml:space="preserve">
+    <value>Nuevo almacén de claves</value>
+  </data>
+  <data name="NewVaultTitle.Text" xml:space="preserve">
+    <value>Crear almacén de claves</value>
+  </data>
+  <data name="VaultSubscriptionTextBlock.Text" xml:space="preserve">
+    <value>Suscripción</value>
+  </data>
+  <data name="VaultResourceGroupTextBlock.Text" xml:space="preserve">
+    <value>Grupo de recursos</value>
+  </data>
+  <data name="VaultNameTextBlock.Text" xml:space="preserve">
+    <value>Nombre del almacén de claves</value>
+  </data>
+  <data name="NewVaultNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>3-24 letras, dígitos y guiones; único globalmente</value>
+  </data>
+  <data name="VaultRegionTextBlock.Text" xml:space="preserve">
+    <value>Región</value>
+  </data>
+  <data name="VaultPricingTierTextBlock.Text" xml:space="preserve">
+    <value>Plan de tarifa</value>
+  </data>
+  <data name="VaultPermissionModelTextBlock.Text" xml:space="preserve">
+    <value>Modelo de permisos</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OnContent" xml:space="preserve">
+    <value>Control de acceso basado en roles de Azure (recomendado)</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OffContent" xml:space="preserve">
+    <value>Directiva de acceso del almacén</value>
+  </data>
+  <data name="VaultGrantAccessRbacText" xml:space="preserve">
+    <value>Asignarme el rol Administrador de Key Vault</value>
+  </data>
+  <data name="VaultGrantAccessPolicyText" xml:space="preserve">
+    <value>Agregar una directiva de acceso con permisos completos para mí</value>
+  </data>
+  <data name="VaultRetentionNumberBox.Header" xml:space="preserve">
+    <value>Días para conservar almacenes eliminados (7-90)</value>
+  </data>
+  <data name="VaultPurgeProtectionTextBlock.Text" xml:space="preserve">
+    <value>Protección de purga</value>
+  </data>
+  <data name="VaultPurgeProtectionHint.Text" xml:space="preserve">
+    <value>Una vez habilitada, la protección de purga no se puede desactivar y los almacenes y elementos eliminados no se pueden purgar hasta que finalice el período de retención.</value>
+  </data>
+  <data name="VaultNameInvalid" xml:space="preserve">
+    <value>El nombre del almacén debe tener 3-24 caracteres, empezar por una letra, terminar en letra o dígito y contener solo letras, dígitos y guiones simples.</value>
+  </data>
+  <data name="VaultLocationRequired" xml:space="preserve">
+    <value>Seleccione una región.</value>
+  </data>
+  <data name="VaultResourceGroupRequired" xml:space="preserve">
+    <value>Seleccione un grupo de recursos.</value>
+  </data>
+  <data name="VaultRetentionInvalid" xml:space="preserve">
+    <value>La retención debe estar entre 7 y 90 días.</value>
+  </data>
+  <data name="VaultNameUnavailable" xml:space="preserve">
+    <value>El nombre '{0}' no está disponible.</value>
+  </data>
+  <data name="VaultCreatePermissionHint" xml:space="preserve">
+    <value>Crear un almacén requiere el rol Colaborador (o Microsoft.KeyVault/vaults/write) en el grupo de recursos.</value>
+  </data>
+  <data name="VaultCreatedMessage" xml:space="preserve">
+    <value>Se creó el almacén de claves '{0}'.</value>
+  </data>
+  <data name="VaultCreatedAccessWarning" xml:space="preserve">
+    <value>Se creó el almacén de claves '{0}', pero no se pudo concederle acceso. Asígnese un rol o una directiva de acceso antes de usarlo.</value>
+  </data>
+  <data name="DeleteVaultConfirmTitle" xml:space="preserve">
+    <value>¿Eliminar almacén de claves?</value>
+  </data>
+  <data name="DeleteVaultConfirmMessage" xml:space="preserve">
+    <value>El almacén de claves '{0}' y todo su contenido se eliminarán temporalmente. Se puede recuperar durante {1} días desde 'Almacenes de claves eliminados' en la suscripción.</value>
+  </data>
+  <data name="VaultDeletedMessage" xml:space="preserve">
+    <value>Se eliminó el almacén de claves '{0}'.</value>
+  </data>
+  <data name="VaultDeletePermissionHint" xml:space="preserve">
+    <value>Eliminar un almacén requiere el rol Colaborador (o Microsoft.KeyVault/vaults/delete) en el almacén.</value>
+  </data>
+  <data name="DeletedVaultsWindowTitle" xml:space="preserve">
+    <value>Almacenes de claves eliminados</value>
+  </data>
+  <data name="DeletedVaultsTitle.Text" xml:space="preserve">
+    <value>Almacenes de claves eliminados</value>
+  </data>
+  <data name="DeletedVaultsEmpty" xml:space="preserve">
+    <value>No hay almacenes de claves eliminados en esta suscripción.</value>
+  </data>
+  <data name="DeletedVaultsResourceGroupHeader.Text" xml:space="preserve">
+    <value>Grupo de recursos</value>
+  </data>
+  <data name="DeletedVaultsLocationHeader.Text" xml:space="preserve">
+    <value>Región</value>
+  </data>
+  <data name="VaultRecoveredMessage" xml:space="preserve">
+    <value>Se recuperó el almacén de claves '{0}'.</value>
+  </data>
+  <data name="PurgeVaultConfirmTitle" xml:space="preserve">
+    <value>¿Purgar permanentemente el almacén de claves?</value>
+  </data>
+  <data name="PurgeVaultConfirmMessage" xml:space="preserve">
+    <value>El almacén de claves '{0}' y todos sus secretos, claves y certificados se destruirán permanentemente. Esta acción no se puede deshacer.</value>
+  </data>
+  <data name="VaultPurgeStartedMessage" xml:space="preserve">
+    <value>Se inició la purga del almacén de claves '{0}'. Puede tardar varios minutos en completarse.</value>
+  </data>
+  <data name="VaultPurgePermissionHint" xml:space="preserve">
+    <value>Purgar un almacén requiere Microsoft.KeyVault/locations/deletedVaults/purge/action en la suscripción.</value>
+  </data>
 </root>

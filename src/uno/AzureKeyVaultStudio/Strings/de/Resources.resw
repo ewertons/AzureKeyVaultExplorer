@@ -912,4 +912,127 @@
   <data name="CertificateCreatedMessage" xml:space="preserve">
     <value>Das Zertifikat '{0}' wurde erstellt.</value>
   </data>
+  <data name="NewVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Neuer Schlüsseltresor...</value>
+  </data>
+  <data name="DeletedVaultsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Gelöschte Schlüsseltresore...</value>
+  </data>
+  <data name="DeleteVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Schlüsseltresor löschen</value>
+  </data>
+  <data name="NewVaultWindowTitle" xml:space="preserve">
+    <value>Neuer Schlüsseltresor</value>
+  </data>
+  <data name="NewVaultTitle.Text" xml:space="preserve">
+    <value>Schlüsseltresor erstellen</value>
+  </data>
+  <data name="VaultSubscriptionTextBlock.Text" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="VaultResourceGroupTextBlock.Text" xml:space="preserve">
+    <value>Ressourcengruppe</value>
+  </data>
+  <data name="VaultNameTextBlock.Text" xml:space="preserve">
+    <value>Name des Schlüsseltresors</value>
+  </data>
+  <data name="NewVaultNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>3-24 Buchstaben, Ziffern und Bindestriche; global eindeutig</value>
+  </data>
+  <data name="VaultRegionTextBlock.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="VaultPricingTierTextBlock.Text" xml:space="preserve">
+    <value>Tarif</value>
+  </data>
+  <data name="VaultPermissionModelTextBlock.Text" xml:space="preserve">
+    <value>Berechtigungsmodell</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OnContent" xml:space="preserve">
+    <value>Rollenbasierte Azure-Zugriffssteuerung (empfohlen)</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OffContent" xml:space="preserve">
+    <value>Tresorzugriffsrichtlinie</value>
+  </data>
+  <data name="VaultGrantAccessRbacText" xml:space="preserve">
+    <value>Mir die Rolle Key Vault-Administrator zuweisen</value>
+  </data>
+  <data name="VaultGrantAccessPolicyText" xml:space="preserve">
+    <value>Zugriffsrichtlinie mit vollen Berechtigungen für mich hinzufügen</value>
+  </data>
+  <data name="VaultRetentionNumberBox.Header" xml:space="preserve">
+    <value>Aufbewahrungsdauer gelöschter Tresore in Tagen (7-90)</value>
+  </data>
+  <data name="VaultPurgeProtectionTextBlock.Text" xml:space="preserve">
+    <value>Löschschutz</value>
+  </data>
+  <data name="VaultPurgeProtectionHint.Text" xml:space="preserve">
+    <value>Einmal aktiviert, kann der Löschschutz nicht deaktiviert werden, und gelöschte Tresore und Elemente können erst nach Ablauf der Aufbewahrungsdauer endgültig gelöscht werden.</value>
+  </data>
+  <data name="VaultNameInvalid" xml:space="preserve">
+    <value>Der Tresorname muss 3-24 Zeichen lang sein, mit einem Buchstaben beginnen, mit einem Buchstaben oder einer Ziffer enden und darf nur Buchstaben, Ziffern und einzelne Bindestriche enthalten.</value>
+  </data>
+  <data name="VaultLocationRequired" xml:space="preserve">
+    <value>Wählen Sie eine Region aus.</value>
+  </data>
+  <data name="VaultResourceGroupRequired" xml:space="preserve">
+    <value>Wählen Sie eine Ressourcengruppe aus.</value>
+  </data>
+  <data name="VaultRetentionInvalid" xml:space="preserve">
+    <value>Die Aufbewahrungsdauer muss zwischen 7 und 90 Tagen liegen.</value>
+  </data>
+  <data name="VaultNameUnavailable" xml:space="preserve">
+    <value>Der Name '{0}' ist nicht verfügbar.</value>
+  </data>
+  <data name="VaultCreatePermissionHint" xml:space="preserve">
+    <value>Zum Erstellen eines Tresors ist die Rolle Mitwirkender (oder Microsoft.KeyVault/vaults/write) für die Ressourcengruppe erforderlich.</value>
+  </data>
+  <data name="VaultCreatedMessage" xml:space="preserve">
+    <value>Schlüsseltresor '{0}' wurde erstellt.</value>
+  </data>
+  <data name="VaultCreatedAccessWarning" xml:space="preserve">
+    <value>Schlüsseltresor '{0}' wurde erstellt, aber die Zugriffsgewährung ist fehlgeschlagen. Weisen Sie sich vor der Verwendung eine Rolle oder Zugriffsrichtlinie zu.</value>
+  </data>
+  <data name="DeleteVaultConfirmTitle" xml:space="preserve">
+    <value>Schlüsseltresor löschen?</value>
+  </data>
+  <data name="DeleteVaultConfirmMessage" xml:space="preserve">
+    <value>Schlüsseltresor '{0}' und sein gesamter Inhalt werden vorläufig gelöscht. Er kann {1} Tage lang über 'Gelöschte Schlüsseltresore' im Abonnement wiederhergestellt werden.</value>
+  </data>
+  <data name="VaultDeletedMessage" xml:space="preserve">
+    <value>Schlüsseltresor '{0}' wurde gelöscht.</value>
+  </data>
+  <data name="VaultDeletePermissionHint" xml:space="preserve">
+    <value>Zum Löschen eines Tresors ist die Rolle Mitwirkender (oder Microsoft.KeyVault/vaults/delete) für den Tresor erforderlich.</value>
+  </data>
+  <data name="DeletedVaultsWindowTitle" xml:space="preserve">
+    <value>Gelöschte Schlüsseltresore</value>
+  </data>
+  <data name="DeletedVaultsTitle.Text" xml:space="preserve">
+    <value>Gelöschte Schlüsseltresore</value>
+  </data>
+  <data name="DeletedVaultsEmpty" xml:space="preserve">
+    <value>Keine gelöschten Schlüsseltresore in diesem Abonnement.</value>
+  </data>
+  <data name="DeletedVaultsResourceGroupHeader.Text" xml:space="preserve">
+    <value>Ressourcengruppe</value>
+  </data>
+  <data name="DeletedVaultsLocationHeader.Text" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="VaultRecoveredMessage" xml:space="preserve">
+    <value>Schlüsseltresor '{0}' wurde wiederhergestellt.</value>
+  </data>
+  <data name="PurgeVaultConfirmTitle" xml:space="preserve">
+    <value>Schlüsseltresor endgültig löschen?</value>
+  </data>
+  <data name="PurgeVaultConfirmMessage" xml:space="preserve">
+    <value>Schlüsseltresor '{0}' und alle seine Geheimnisse, Schlüssel und Zertifikate werden dauerhaft vernichtet. Dies kann nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="VaultPurgeStartedMessage" xml:space="preserve">
+    <value>Endgültiges Löschen von Schlüsseltresor '{0}' gestartet. Der Vorgang kann einige Minuten dauern.</value>
+  </data>
+  <data name="VaultPurgePermissionHint" xml:space="preserve">
+    <value>Zum endgültigen Löschen eines Tresors ist Microsoft.KeyVault/locations/deletedVaults/purge/action für das Abonnement erforderlich.</value>
+  </data>
 </root>

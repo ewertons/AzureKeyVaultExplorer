@@ -912,4 +912,127 @@
   <data name="CertificateCreatedMessage" xml:space="preserve">
     <value>O certificado '{0}' foi criado.</value>
   </data>
+  <data name="NewVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Novo cofre de chaves...</value>
+  </data>
+  <data name="DeletedVaultsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Cofres de chaves excluídos...</value>
+  </data>
+  <data name="DeleteVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Excluir cofre de chaves</value>
+  </data>
+  <data name="NewVaultWindowTitle" xml:space="preserve">
+    <value>Novo cofre de chaves</value>
+  </data>
+  <data name="NewVaultTitle.Text" xml:space="preserve">
+    <value>Criar cofre de chaves</value>
+  </data>
+  <data name="VaultSubscriptionTextBlock.Text" xml:space="preserve">
+    <value>Assinatura</value>
+  </data>
+  <data name="VaultResourceGroupTextBlock.Text" xml:space="preserve">
+    <value>Grupo de recursos</value>
+  </data>
+  <data name="VaultNameTextBlock.Text" xml:space="preserve">
+    <value>Nome do cofre de chaves</value>
+  </data>
+  <data name="NewVaultNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>3-24 letras, dígitos e hifens; globalmente exclusivo</value>
+  </data>
+  <data name="VaultRegionTextBlock.Text" xml:space="preserve">
+    <value>Região</value>
+  </data>
+  <data name="VaultPricingTierTextBlock.Text" xml:space="preserve">
+    <value>Tipo de preço</value>
+  </data>
+  <data name="VaultPermissionModelTextBlock.Text" xml:space="preserve">
+    <value>Modelo de permissão</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OnContent" xml:space="preserve">
+    <value>Controle de acesso baseado em função do Azure (recomendado)</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OffContent" xml:space="preserve">
+    <value>Política de acesso do cofre</value>
+  </data>
+  <data name="VaultGrantAccessRbacText" xml:space="preserve">
+    <value>Atribuir a mim a função Administrador do Key Vault</value>
+  </data>
+  <data name="VaultGrantAccessPolicyText" xml:space="preserve">
+    <value>Adicionar uma política de acesso com permissões completas para mim</value>
+  </data>
+  <data name="VaultRetentionNumberBox.Header" xml:space="preserve">
+    <value>Dias para reter cofres excluídos (7-90)</value>
+  </data>
+  <data name="VaultPurgeProtectionTextBlock.Text" xml:space="preserve">
+    <value>Proteção contra limpeza</value>
+  </data>
+  <data name="VaultPurgeProtectionHint.Text" xml:space="preserve">
+    <value>Depois de habilitada, a proteção contra limpeza não pode ser desativada e cofres e itens excluídos não podem ser limpos até o fim do período de retenção.</value>
+  </data>
+  <data name="VaultNameInvalid" xml:space="preserve">
+    <value>O nome do cofre deve ter 3-24 caracteres, começar com uma letra, terminar com letra ou dígito e conter apenas letras, dígitos e hifens simples.</value>
+  </data>
+  <data name="VaultLocationRequired" xml:space="preserve">
+    <value>Selecione uma região.</value>
+  </data>
+  <data name="VaultResourceGroupRequired" xml:space="preserve">
+    <value>Selecione um grupo de recursos.</value>
+  </data>
+  <data name="VaultRetentionInvalid" xml:space="preserve">
+    <value>A retenção deve estar entre 7 e 90 dias.</value>
+  </data>
+  <data name="VaultNameUnavailable" xml:space="preserve">
+    <value>O nome '{0}' não está disponível.</value>
+  </data>
+  <data name="VaultCreatePermissionHint" xml:space="preserve">
+    <value>Criar um cofre requer a função Colaborador (ou Microsoft.KeyVault/vaults/write) no grupo de recursos.</value>
+  </data>
+  <data name="VaultCreatedMessage" xml:space="preserve">
+    <value>O cofre de chaves '{0}' foi criado.</value>
+  </data>
+  <data name="VaultCreatedAccessWarning" xml:space="preserve">
+    <value>O cofre de chaves '{0}' foi criado, mas a concessão de acesso falhou. Atribua a si mesmo uma função ou política de acesso antes de usá-lo.</value>
+  </data>
+  <data name="DeleteVaultConfirmTitle" xml:space="preserve">
+    <value>Excluir cofre de chaves?</value>
+  </data>
+  <data name="DeleteVaultConfirmMessage" xml:space="preserve">
+    <value>O cofre de chaves '{0}' e todo o seu conteúdo serão excluídos de forma reversível. Ele pode ser recuperado por {1} dias em 'Cofres de chaves excluídos' na assinatura.</value>
+  </data>
+  <data name="VaultDeletedMessage" xml:space="preserve">
+    <value>O cofre de chaves '{0}' foi excluído.</value>
+  </data>
+  <data name="VaultDeletePermissionHint" xml:space="preserve">
+    <value>Excluir um cofre requer a função Colaborador (ou Microsoft.KeyVault/vaults/delete) no cofre.</value>
+  </data>
+  <data name="DeletedVaultsWindowTitle" xml:space="preserve">
+    <value>Cofres de chaves excluídos</value>
+  </data>
+  <data name="DeletedVaultsTitle.Text" xml:space="preserve">
+    <value>Cofres de chaves excluídos</value>
+  </data>
+  <data name="DeletedVaultsEmpty" xml:space="preserve">
+    <value>Nenhum cofre de chaves excluído nesta assinatura.</value>
+  </data>
+  <data name="DeletedVaultsResourceGroupHeader.Text" xml:space="preserve">
+    <value>Grupo de recursos</value>
+  </data>
+  <data name="DeletedVaultsLocationHeader.Text" xml:space="preserve">
+    <value>Região</value>
+  </data>
+  <data name="VaultRecoveredMessage" xml:space="preserve">
+    <value>O cofre de chaves '{0}' foi recuperado.</value>
+  </data>
+  <data name="PurgeVaultConfirmTitle" xml:space="preserve">
+    <value>Limpar permanentemente o cofre de chaves?</value>
+  </data>
+  <data name="PurgeVaultConfirmMessage" xml:space="preserve">
+    <value>O cofre de chaves '{0}' e todos os seus segredos, chaves e certificados serão destruídos permanentemente. Isso não pode ser desfeito.</value>
+  </data>
+  <data name="VaultPurgeStartedMessage" xml:space="preserve">
+    <value>A limpeza do cofre de chaves '{0}' foi iniciada. Pode levar vários minutos para concluir.</value>
+  </data>
+  <data name="VaultPurgePermissionHint" xml:space="preserve">
+    <value>Limpar um cofre requer Microsoft.KeyVault/locations/deletedVaults/purge/action na assinatura.</value>
+  </data>
 </root>

@@ -912,4 +912,127 @@
   <data name="CertificateCreatedMessage" xml:space="preserve">
     <value>Le certificat '{0}' a été créé.</value>
   </data>
+  <data name="NewVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Nouveau coffre de clés...</value>
+  </data>
+  <data name="DeletedVaultsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Coffres de clés supprimés...</value>
+  </data>
+  <data name="DeleteVaultMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Supprimer le coffre de clés</value>
+  </data>
+  <data name="NewVaultWindowTitle" xml:space="preserve">
+    <value>Nouveau coffre de clés</value>
+  </data>
+  <data name="NewVaultTitle.Text" xml:space="preserve">
+    <value>Créer un coffre de clés</value>
+  </data>
+  <data name="VaultSubscriptionTextBlock.Text" xml:space="preserve">
+    <value>Abonnement</value>
+  </data>
+  <data name="VaultResourceGroupTextBlock.Text" xml:space="preserve">
+    <value>Groupe de ressources</value>
+  </data>
+  <data name="VaultNameTextBlock.Text" xml:space="preserve">
+    <value>Nom du coffre de clés</value>
+  </data>
+  <data name="NewVaultNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>3 à 24 lettres, chiffres et tirets ; unique au monde</value>
+  </data>
+  <data name="VaultRegionTextBlock.Text" xml:space="preserve">
+    <value>Région</value>
+  </data>
+  <data name="VaultPricingTierTextBlock.Text" xml:space="preserve">
+    <value>Niveau tarifaire</value>
+  </data>
+  <data name="VaultPermissionModelTextBlock.Text" xml:space="preserve">
+    <value>Modèle d'autorisation</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OnContent" xml:space="preserve">
+    <value>Contrôle d'accès en fonction du rôle Azure (recommandé)</value>
+  </data>
+  <data name="VaultRbacToggleSwitch.OffContent" xml:space="preserve">
+    <value>Stratégie d'accès du coffre</value>
+  </data>
+  <data name="VaultGrantAccessRbacText" xml:space="preserve">
+    <value>M'attribuer le rôle Administrateur Key Vault</value>
+  </data>
+  <data name="VaultGrantAccessPolicyText" xml:space="preserve">
+    <value>Ajouter une stratégie d'accès avec toutes les autorisations pour moi</value>
+  </data>
+  <data name="VaultRetentionNumberBox.Header" xml:space="preserve">
+    <value>Jours de conservation des coffres supprimés (7-90)</value>
+  </data>
+  <data name="VaultPurgeProtectionTextBlock.Text" xml:space="preserve">
+    <value>Protection contre le vidage</value>
+  </data>
+  <data name="VaultPurgeProtectionHint.Text" xml:space="preserve">
+    <value>Une fois activée, la protection contre le vidage ne peut pas être désactivée et les coffres et éléments supprimés ne peuvent pas être vidés avant la fin de la période de conservation.</value>
+  </data>
+  <data name="VaultNameInvalid" xml:space="preserve">
+    <value>Le nom du coffre doit comporter 3 à 24 caractères, commencer par une lettre, se terminer par une lettre ou un chiffre et ne contenir que des lettres, chiffres et tirets simples.</value>
+  </data>
+  <data name="VaultLocationRequired" xml:space="preserve">
+    <value>Sélectionnez une région.</value>
+  </data>
+  <data name="VaultResourceGroupRequired" xml:space="preserve">
+    <value>Sélectionnez un groupe de ressources.</value>
+  </data>
+  <data name="VaultRetentionInvalid" xml:space="preserve">
+    <value>La conservation doit être comprise entre 7 et 90 jours.</value>
+  </data>
+  <data name="VaultNameUnavailable" xml:space="preserve">
+    <value>Le nom '{0}' n'est pas disponible.</value>
+  </data>
+  <data name="VaultCreatePermissionHint" xml:space="preserve">
+    <value>La création d'un coffre nécessite le rôle Contributeur (ou Microsoft.KeyVault/vaults/write) sur le groupe de ressources.</value>
+  </data>
+  <data name="VaultCreatedMessage" xml:space="preserve">
+    <value>Le coffre de clés '{0}' a été créé.</value>
+  </data>
+  <data name="VaultCreatedAccessWarning" xml:space="preserve">
+    <value>Le coffre de clés '{0}' a été créé, mais l'octroi de l'accès a échoué. Attribuez-vous un rôle ou une stratégie d'accès avant de l'utiliser.</value>
+  </data>
+  <data name="DeleteVaultConfirmTitle" xml:space="preserve">
+    <value>Supprimer le coffre de clés ?</value>
+  </data>
+  <data name="DeleteVaultConfirmMessage" xml:space="preserve">
+    <value>Le coffre de clés '{0}' et tout son contenu seront supprimés de manière réversible. Il peut être récupéré pendant {1} jours depuis 'Coffres de clés supprimés' sur l'abonnement.</value>
+  </data>
+  <data name="VaultDeletedMessage" xml:space="preserve">
+    <value>Le coffre de clés '{0}' a été supprimé.</value>
+  </data>
+  <data name="VaultDeletePermissionHint" xml:space="preserve">
+    <value>La suppression d'un coffre nécessite le rôle Contributeur (ou Microsoft.KeyVault/vaults/delete) sur le coffre.</value>
+  </data>
+  <data name="DeletedVaultsWindowTitle" xml:space="preserve">
+    <value>Coffres de clés supprimés</value>
+  </data>
+  <data name="DeletedVaultsTitle.Text" xml:space="preserve">
+    <value>Coffres de clés supprimés</value>
+  </data>
+  <data name="DeletedVaultsEmpty" xml:space="preserve">
+    <value>Aucun coffre de clés supprimé dans cet abonnement.</value>
+  </data>
+  <data name="DeletedVaultsResourceGroupHeader.Text" xml:space="preserve">
+    <value>Groupe de ressources</value>
+  </data>
+  <data name="DeletedVaultsLocationHeader.Text" xml:space="preserve">
+    <value>Région</value>
+  </data>
+  <data name="VaultRecoveredMessage" xml:space="preserve">
+    <value>Le coffre de clés '{0}' a été récupéré.</value>
+  </data>
+  <data name="PurgeVaultConfirmTitle" xml:space="preserve">
+    <value>Vider définitivement le coffre de clés ?</value>
+  </data>
+  <data name="PurgeVaultConfirmMessage" xml:space="preserve">
+    <value>Le coffre de clés '{0}' et tous ses secrets, clés et certificats seront définitivement détruits. Cette action est irréversible.</value>
+  </data>
+  <data name="VaultPurgeStartedMessage" xml:space="preserve">
+    <value>Le vidage du coffre de clés '{0}' a démarré. Il peut prendre plusieurs minutes.</value>
+  </data>
+  <data name="VaultPurgePermissionHint" xml:space="preserve">
+    <value>Le vidage d'un coffre nécessite Microsoft.KeyVault/locations/deletedVaults/purge/action sur l'abonnement.</value>
+  </data>
 </root>

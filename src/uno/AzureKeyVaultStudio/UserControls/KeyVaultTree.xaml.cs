@@ -131,17 +131,31 @@ public sealed partial class KeyVaultTree : UserControl
     // this is due to a DataTemplate bug which would crash the app in v2.0.0
     private void TreeViewItem_ContextRequested(UIElement sender, ContextRequestedEventArgs args)
     {
-        var point = new Point(0, 0);
-        if (sender is TreeViewItem && (sender as TreeViewItem)!.DataContext is KvKeyVaultResourceModel)
+        if (sender is not TreeViewItem { DataContext: KvTreeNodeModel node } item)
+            return;
+
+        var flyout = node switch
         {
-            if (args.TryGetPosition(sender, out point))
-            {
-                keyVaultMenuFlyout.ShowAt(sender, point);
-            }
-            else
-            {
-                keyVaultMenuFlyout.ShowAt((FrameworkElement)sender);
-            }
+            KvKeyVaultResourceModel { IsPlaceholder: false } => keyVaultMenuFlyout,
+            KvSubscriptionModel { Type: KvSubscriptionModel.ExplorerItemType.ResourceGroup } => Resources["SubscriptionContextFlyout"] as MenuFlyout,
+            KvResourceGroupModel { ResourceGroupResource: not null } => Resources["ResourceGroupContextFlyout"] as MenuFlyout,
+            _ => null,
+        };
+        if (flyout is null)
+            return;
+
+        // Flyouts don't reliably inherit the item's DataContext, so pass the node explicitly.
+        foreach (var menuItem in flyout.Items.OfType<MenuFlyoutItem>().Where(i => "NodeParameter".Equals(i.Tag)))
+            menuItem.CommandParameter = node;
+
+        if (args.TryGetPosition(item, out var point))
+        {
+            flyout.ShowAt(item, point);
         }
+        else
+        {
+            flyout.ShowAt(item);
+        }
+        args.Handled = true;
     }
 }

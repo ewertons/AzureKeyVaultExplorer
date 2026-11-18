@@ -57,7 +57,46 @@
                         <FontIcon Glyph="&#xE72D;" />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem
+                    x:Uid="DeleteVaultMenuFlyoutItem"
+                    Command="{x:Bind ViewModel.DeleteVaultCommand}"
+                    Tag="NodeParameter">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE74D;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
 
+            </MenuFlyout>
+
+            <MenuFlyout x:Key="SubscriptionContextFlyout">
+                <MenuFlyoutItem
+                    x:Uid="NewVaultMenuFlyoutItem"
+                    Command="{x:Bind ViewModel.NewVaultCommand}"
+                    Tag="NodeParameter">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE710;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+                <MenuFlyoutItem
+                    x:Uid="DeletedVaultsMenuFlyoutItem"
+                    Command="{x:Bind ViewModel.ShowDeletedVaultsCommand}"
+                    Tag="NodeParameter">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE81C;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
+            </MenuFlyout>
+
+            <MenuFlyout x:Key="ResourceGroupContextFlyout">
+                <MenuFlyoutItem
+                    x:Uid="NewVaultMenuFlyoutItem"
+                    Command="{x:Bind ViewModel.NewVaultCommand}"
+                    Tag="NodeParameter">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE710;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
             </MenuFlyout>
 
             <DataTemplate x:Key="TreeNodeTemplate" x:DataType="models:KvTreeNodeModel">
