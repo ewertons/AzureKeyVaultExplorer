@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+      - 'feature/**'
+      - 'fix/**'
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Test
+        working-directory: src/uno
+        run: dotnet test AzureKeyVaultStudio.Tests/AzureKeyVaultStudio.Tests.csproj -c Release --results-directory TestResults --logger "trx;LogFileName=results.trx"
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.os }}
+          path: src/uno/TestResults/*.trx
+
+  build:
+    name: Build app (${{ matrix.framework }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            framework: net10.0-desktop
+          - os: macos-latest
+            framework: net10.0-desktop
+          - os: windows-latest
+            framework: net10.0-windows10.0.26100
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore workloads
+        if: runner.os == 'macOS'
+        working-directory: src/uno/AzureKeyVaultStudio
+        run: dotnet workload restore
+      - name: Build
+        working-directory: src/uno/AzureKeyVaultStudio
+        run: dotnet build AzureKeyVaultStudio.csproj -c Release -f ${{ matrix.framework }}

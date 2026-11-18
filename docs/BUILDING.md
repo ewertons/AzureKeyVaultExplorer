@@ -54,3 +54,14 @@ Otherwise you will get an error message, see [First time Azure Tenant setup](FIR
 
 Alternatively, you create an enterprise application with the following permissions, then you can modify the clientId in the `Constants.cs` file to your newly created app that is hosted in your own tenant.
 <img src="https://github.com/user-attachments/assets/e17754a6-728e-490b-ad74-8e87e895387a"/>
+
+### Running the tests
+
+The unit tests cover the platform-independent logic (offline sync planning, the queued-change policy, request validation and the encrypted offline database). They run on Windows, Linux and macOS:
+
+```
+cd src/uno
+dotnet test AzureKeyVaultStudio.Tests
+```
+
+The [CI workflow](../.github/workflows/ci.yml) runs them on all three platforms and builds the app for each one.

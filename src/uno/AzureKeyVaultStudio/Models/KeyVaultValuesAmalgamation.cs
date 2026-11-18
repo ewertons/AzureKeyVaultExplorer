@@ -225,14 +225,6 @@ public sealed class KeyVaultItemProperties
     }
 }
 
-public enum KeyVaultItemType
-{
-    Certificate = 0,
-    Secret = 1,
-    Key = 2,
-    All = 3
-}
-
 [Bindable(true)]
 public partial class TagItem : ObservableObject
 {

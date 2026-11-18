@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    The app targets Uno/WinUI heads, which a plain test host can't load. Instead, the platform-independent
+    logic (sync planning, queue policy, request validation and the offline database) is compiled in directly.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+    <RootNamespace>AzureKeyVaultStudio.Tests</RootNamespace>
+    <AppDir>..\AzureKeyVaultStudio\</AppDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(AppDir)Models\KeyVaultItemType.cs" Link="App\Models\KeyVaultItemType.cs" />
+    <Compile Include="$(AppDir)Models\OfflineModels.cs" Link="App\Models\OfflineModels.cs" />
+    <Compile Include="$(AppDir)Models\OfflineSyncPlanner.cs" Link="App\Models\OfflineSyncPlanner.cs" />
+    <Compile Include="$(AppDir)Models\PendingOperationModels.cs" Link="App\Models\PendingOperationModels.cs" />
+    <Compile Include="$(AppDir)Models\PendingOperationPolicy.cs" Link="App\Models\PendingOperationPolicy.cs" />
+    <Compile Include="$(AppDir)Models\NewKeyRequest.cs" Link="App\Models\NewKeyRequest.cs" />
+    <Compile Include="$(AppDir)Models\NewCertificateRequest.cs" Link="App\Models\NewCertificateRequest.cs" />
+    <Compile Include="$(AppDir)Models\NewVaultRequest.cs" Link="App\Models\NewVaultRequest.cs" />
+    <Compile Include="$(AppDir)Database\DbContext.Offline.cs" Link="App\Database\DbContext.Offline.cs" />
+    <Compile Include="$(AppDir)Database\DbContext.PendingOperations.cs" Link="App\Database\DbContext.PendingOperations.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="Azure.ResourceManager.KeyVault" />
+    <PackageReference Include="Azure.Security.KeyVault.Certificates" />
+    <PackageReference Include="Azure.Security.KeyVault.Keys" />
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+    <Using Include="AzureKeyVaultStudio.Models" />
+  </ItemGroup>
+
+</Project>

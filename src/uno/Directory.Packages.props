@@ -9,6 +9,8 @@
     <PackageVersion Include="FluentAssertions" Version="[7.0.0]" />
     <PackageVersion Include="Humanizer" Version="3.0.10" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4" />
     <PackageVersion Include="Tmds.DBus.Protocol" Version="0.95.1" />
     <PackageVersion Include="Uno.UITest.Helpers" Version="1.1.0-dev.70" />
     <PackageVersion Include="Azure.Core" Version="1.50.0" />
