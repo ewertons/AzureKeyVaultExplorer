@@ -149,6 +149,7 @@ public partial class OfflineStoreViewModel : ObservableObject, IDisposable
             }
 
             HasVaults = Vaults.Count > 0;
+            await ReloadPendingAsync();
             await SearchAsync();
         }
         catch (Exception ex)

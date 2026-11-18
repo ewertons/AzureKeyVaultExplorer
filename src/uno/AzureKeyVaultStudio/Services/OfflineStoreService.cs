@@ -9,25 +9,33 @@ namespace AzureKeyVaultStudio.Services;
 public sealed record OfflineSyncResult(string VaultUri, int Upserted, int Deleted, int ValuesStored, IReadOnlyList<string> Errors)
 {
     public bool Succeeded => Errors.Count == 0;
+
+    /// <summary>Queued changes pushed to Key Vault during this sync.</summary>
+    public int Pushed { get; init; }
+
+    /// <summary>The pull was skipped because Key Vault couldn't be reached while pushing.</summary>
+    public bool PullSkipped { get; init; }
 }
 
 /// <summary>
 /// Keeps an encrypted local copy of selected vaults so they can be searched without network access.
 /// </summary>
-public sealed class OfflineStoreService
+public sealed partial class OfflineStoreService
 {
     private const int MaxParallelValueReads = 8;
     private const int MaxReportedErrors = 5;
 
     private readonly VaultService _vaultService;
     private readonly AuthService _authService;
+    private readonly IStringLocalizer _localizer;
     private readonly object _syncLock = new();
     private readonly Dictionary<string, Task<OfflineSyncResult>> _runningSyncs = new(StringComparer.OrdinalIgnoreCase);
 
-    public OfflineStoreService(VaultService vaultService, AuthService authService)
+    public OfflineStoreService(VaultService vaultService, AuthService authService, IStringLocalizer localizer)
     {
         _vaultService = vaultService;
         _authService = authService;
+        _localizer = localizer;
     }
 
     public static string NormalizeVaultUri(Uri vaultUri) => vaultUri.AbsoluteUri.TrimEnd('/') + "/";
@@ -102,7 +110,7 @@ public sealed class OfflineStoreService
             var result = await SyncCoreAsync(vaultUri, cancellationToken);
             await DbContext.RecordOfflineVaultSyncAsync(
                 vaultUri,
-                DateTimeOffset.UtcNow,
+                result.PullSkipped ? null : DateTimeOffset.UtcNow,
                 result.Succeeded ? null : string.Join(Environment.NewLine, result.Errors.Take(MaxReportedErrors)));
             return result;
         }
@@ -129,9 +137,14 @@ public sealed class OfflineStoreService
             ?? throw new InvalidOperationException($"Vault {vaultUri} is not in the offline store.");
         var uri = new Uri(vault.VaultUri);
 
+        // Push first, so the pull reflects the changes just made.
+        var push = await PushPendingAsync(vaultUri, uri, cancellationToken);
+        if (push.Interrupted)
+            return new OfflineSyncResult(vaultUri, 0, 0, 0, push.Errors) { Pushed = push.Pushed, PullSkipped = true };
+
         var remote = new List<RemoteItemSnapshot>();
         var completeTypes = new HashSet<KeyVaultItemType>();
-        var errors = new List<string>();
+        var errors = new List<string>(push.Errors);
 
         async Task CollectAsync<T>(KeyVaultItemType type, IAsyncEnumerable<T> source, Func<T, RemoteItemSnapshot> map)
         {
@@ -165,7 +178,7 @@ public sealed class OfflineStoreService
             c.CreatedOn, c.UpdatedOn, c.ExpiresOn, CopyTags(c.Tags)));
 
         if (completeTypes.Count == 0)
-            return new OfflineSyncResult(vaultUri, 0, 0, 0, errors);
+            return new OfflineSyncResult(vaultUri, 0, 0, 0, errors) { Pushed = push.Pushed };
 
         var local = await DbContext.GetOfflineItemStatesAsync(vaultUri);
         var plan = OfflineSyncPlanner.Plan(local, remote, completeTypes, vault.IncludeSecretValues);
@@ -190,7 +203,7 @@ public sealed class OfflineStoreService
         errors.AddRange(valueErrors);
 
         await DbContext.ApplyOfflineSyncAsync(vaultUri, plan, values);
-        return new OfflineSyncResult(vaultUri, plan.Upserts.Count, plan.Deletes.Count, values.Count, errors);
+        return new OfflineSyncResult(vaultUri, plan.Upserts.Count, plan.Deletes.Count, values.Count, errors) { Pushed = push.Pushed };
     }
 
     private static IReadOnlyDictionary<string, string> CopyTags(IDictionary<string, string>? tags) =>

@@ -1119,4 +1119,115 @@
   <data name="OfflineVaultAddedMessage" xml:space="preserve">
     <value>'{0}' foi adicionado ao armazenamento offline. Sincronizando…</value>
   </data>
+  <data name="OfflineNewSecretButton.Content" xml:space="preserve">
+    <value>Novo segredo</value>
+  </data>
+  <data name="OfflineSetValueButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Definir um novo valor</value>
+  </data>
+  <data name="OfflineDeleteItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="OfflinePendingIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tem alterações aguardando sincronização</value>
+  </data>
+  <data name="OfflinePendingTitle.Text" xml:space="preserve">
+    <value>Alterações pendentes</value>
+  </data>
+  <data name="OfflinePendingDescription.Text" xml:space="preserve">
+    <value>Enviadas ao Key Vault automaticamente quando ele estiver acessível.</value>
+  </data>
+  <data name="OfflineRetryButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Tentar novamente agora</value>
+  </data>
+  <data name="OfflineOverwriteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sobrescrever a alteração feita no Key Vault</value>
+  </data>
+  <data name="OfflineDiscardButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Descartar esta alteração</value>
+  </data>
+  <data name="PendingKindCreate" xml:space="preserve">
+    <value>Criar segredo</value>
+  </data>
+  <data name="PendingKindSetValue" xml:space="preserve">
+    <value>Novo valor</value>
+  </data>
+  <data name="PendingKindDelete" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="PendingStatusWaiting" xml:space="preserve">
+    <value>Aguardando sincronização</value>
+  </data>
+  <data name="PendingStatusRetrying" xml:space="preserve">
+    <value>Nova tentativa às {0}</value>
+  </data>
+  <data name="PendingStatusConflict" xml:space="preserve">
+    <value>Alterado no Key Vault</value>
+  </data>
+  <data name="PendingStatusFailed" xml:space="preserve">
+    <value>Falhou</value>
+  </data>
+  <data name="PendingConflictError" xml:space="preserve">
+    <value>{0} foi alterado no Key Vault depois que sua alteração entrou na fila. Sobrescreva ou descarte-a no armazenamento offline.</value>
+  </data>
+  <data name="OfflineSecretDialogNewTitle" xml:space="preserve">
+    <value>Novo segredo</value>
+  </data>
+  <data name="OfflineSecretDialogSetTitle" xml:space="preserve">
+    <value>Novo valor para {0}</value>
+  </data>
+  <data name="OfflineSecretDialogVault" xml:space="preserve">
+    <value>Cofre</value>
+  </data>
+  <data name="OfflineSecretDialogName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="OfflineSecretDialogValue" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="OfflineSecretDialogContentType" xml:space="preserve">
+    <value>Tipo de conteúdo (opcional)</value>
+  </data>
+  <data name="OfflineSecretDialogInvalidName" xml:space="preserve">
+    <value>Use de 1 a 127 letras, dígitos e hifens.</value>
+  </data>
+  <data name="OfflineSecretDialogSaveButton" xml:space="preserve">
+    <value>Salvar</value>
+  </data>
+  <data name="OfflineChangeQueuedTitle" xml:space="preserve">
+    <value>Alteração na fila</value>
+  </data>
+  <data name="OfflineChangeQueuedMessage" xml:space="preserve">
+    <value>{0} será atualizado no Key Vault assim que ele estiver acessível.</value>
+  </data>
+  <data name="OfflineDeleteConfirmTitle" xml:space="preserve">
+    <value>Excluir {0}?</value>
+  </data>
+  <data name="OfflineDeleteConfirmMessage" xml:space="preserve">
+    <value>{0} será excluído de {1} assim que o Key Vault estiver acessível. Ele pode ser recuperado durante o período de retenção da exclusão temporária.</value>
+  </data>
+  <data name="OfflineDiscardConfirmTitle" xml:space="preserve">
+    <value>Descartar alteração?</value>
+  </data>
+  <data name="OfflineDiscardConfirmMessage" xml:space="preserve">
+    <value>A alteração na fila de {0} será perdida.</value>
+  </data>
+  <data name="OfflineDiscardConfirmButton" xml:space="preserve">
+    <value>Descartar</value>
+  </data>
+  <data name="OfflineOverwriteConfirmTitle" xml:space="preserve">
+    <value>Sobrescrever a alteração remota?</value>
+  </data>
+  <data name="OfflineOverwriteConfirmMessage" xml:space="preserve">
+    <value>{0} foi alterado no Key Vault depois que sua alteração entrou na fila. Sobrescrever substitui essa alteração.</value>
+  </data>
+  <data name="OfflineOverwriteConfirmButton" xml:space="preserve">
+    <value>Sobrescrever</value>
+  </data>
+  <data name="LoginPageOfflineStoreText.Text" xml:space="preserve">
+    <value>Abrir cópia offline</value>
+  </data>
+  <data name="LoginPageOfflineBackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Voltar</value>
+  </data>
 </root>

@@ -185,6 +185,7 @@ public partial class App : Application
                 await navigator.NavigateViewModelAsync<LoginViewModel>(this, qualifier: Qualifiers.Nested);
             }
             _ = DbContext.InitializeDatabase();
+            services.GetRequiredService<OfflineStoreService>().StartBackgroundSync();
         }
         //Host = await MainWindow.InitializeNavigationAsync(() => Task.FromResult(builder.Build()),  initialNavigate:  builder.NavigateAsync<Shell>(initialNavigate: InitialNavigate));
         Host = await builder.NavigateAsync<Shell>(initialNavigate: InitialNavigate);

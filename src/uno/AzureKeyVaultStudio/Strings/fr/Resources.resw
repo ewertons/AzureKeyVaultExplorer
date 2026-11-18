@@ -1119,4 +1119,115 @@
   <data name="OfflineVaultAddedMessage" xml:space="preserve">
     <value>'{0}' a été ajouté au stockage hors connexion. Synchronisation…</value>
   </data>
+  <data name="OfflineNewSecretButton.Content" xml:space="preserve">
+    <value>Nouveau secret</value>
+  </data>
+  <data name="OfflineSetValueButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Définir une nouvelle valeur</value>
+  </data>
+  <data name="OfflineDeleteItemButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="OfflinePendingIcon.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Contient des modifications en attente de synchronisation</value>
+  </data>
+  <data name="OfflinePendingTitle.Text" xml:space="preserve">
+    <value>Modifications en attente</value>
+  </data>
+  <data name="OfflinePendingDescription.Text" xml:space="preserve">
+    <value>Envoyées automatiquement à Key Vault dès qu'il est joignable.</value>
+  </data>
+  <data name="OfflineRetryButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Réessayer maintenant</value>
+  </data>
+  <data name="OfflineOverwriteButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Écraser la modification faite dans Key Vault</value>
+  </data>
+  <data name="OfflineDiscardButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Abandonner cette modification</value>
+  </data>
+  <data name="PendingKindCreate" xml:space="preserve">
+    <value>Créer le secret</value>
+  </data>
+  <data name="PendingKindSetValue" xml:space="preserve">
+    <value>Nouvelle valeur</value>
+  </data>
+  <data name="PendingKindDelete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="PendingStatusWaiting" xml:space="preserve">
+    <value>En attente de synchronisation</value>
+  </data>
+  <data name="PendingStatusRetrying" xml:space="preserve">
+    <value>Nouvel essai à {0}</value>
+  </data>
+  <data name="PendingStatusConflict" xml:space="preserve">
+    <value>Modifié dans Key Vault</value>
+  </data>
+  <data name="PendingStatusFailed" xml:space="preserve">
+    <value>Échec</value>
+  </data>
+  <data name="PendingConflictError" xml:space="preserve">
+    <value>{0} a été modifié dans Key Vault après la mise en file d'attente de votre modification. Écrasez-la ou abandonnez-la dans le magasin hors connexion.</value>
+  </data>
+  <data name="OfflineSecretDialogNewTitle" xml:space="preserve">
+    <value>Nouveau secret</value>
+  </data>
+  <data name="OfflineSecretDialogSetTitle" xml:space="preserve">
+    <value>Nouvelle valeur pour {0}</value>
+  </data>
+  <data name="OfflineSecretDialogVault" xml:space="preserve">
+    <value>Coffre</value>
+  </data>
+  <data name="OfflineSecretDialogName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="OfflineSecretDialogValue" xml:space="preserve">
+    <value>Valeur</value>
+  </data>
+  <data name="OfflineSecretDialogContentType" xml:space="preserve">
+    <value>Type de contenu (facultatif)</value>
+  </data>
+  <data name="OfflineSecretDialogInvalidName" xml:space="preserve">
+    <value>Utilisez de 1 à 127 lettres, chiffres et tirets.</value>
+  </data>
+  <data name="OfflineSecretDialogSaveButton" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="OfflineChangeQueuedTitle" xml:space="preserve">
+    <value>Modification en file d'attente</value>
+  </data>
+  <data name="OfflineChangeQueuedMessage" xml:space="preserve">
+    <value>{0} sera mis à jour dans Key Vault dès qu'il sera joignable.</value>
+  </data>
+  <data name="OfflineDeleteConfirmTitle" xml:space="preserve">
+    <value>Supprimer {0} ?</value>
+  </data>
+  <data name="OfflineDeleteConfirmMessage" xml:space="preserve">
+    <value>{0} sera supprimé de {1} dès que Key Vault sera joignable. Il peut être récupéré pendant la période de rétention de la suppression réversible.</value>
+  </data>
+  <data name="OfflineDiscardConfirmTitle" xml:space="preserve">
+    <value>Abandonner la modification ?</value>
+  </data>
+  <data name="OfflineDiscardConfirmMessage" xml:space="preserve">
+    <value>La modification en attente de {0} sera perdue.</value>
+  </data>
+  <data name="OfflineDiscardConfirmButton" xml:space="preserve">
+    <value>Abandonner</value>
+  </data>
+  <data name="OfflineOverwriteConfirmTitle" xml:space="preserve">
+    <value>Écraser la modification distante ?</value>
+  </data>
+  <data name="OfflineOverwriteConfirmMessage" xml:space="preserve">
+    <value>{0} a été modifié dans Key Vault après la mise en file d'attente de votre modification. L'écrasement remplace cette modification.</value>
+  </data>
+  <data name="OfflineOverwriteConfirmButton" xml:space="preserve">
+    <value>Écraser</value>
+  </data>
+  <data name="LoginPageOfflineStoreText.Text" xml:space="preserve">
+    <value>Ouvrir la copie hors connexion</value>
+  </data>
+  <data name="LoginPageOfflineBackButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Retour</value>
+  </data>
 </root>

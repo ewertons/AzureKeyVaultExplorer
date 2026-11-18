@@ -35,4 +35,19 @@ public sealed partial class OfflineStorePage : Page
 
     private void CopyValue_Click(object sender, RoutedEventArgs e) =>
         ViewModel.CopyValueCommand.Execute((sender as FrameworkElement)?.DataContext as OfflineItem);
+
+    private void SetSecretValue_Click(object sender, RoutedEventArgs e) =>
+        ViewModel.SetSecretValueCommand.Execute((sender as FrameworkElement)?.DataContext as OfflineItem);
+
+    private void DeleteItem_Click(object sender, RoutedEventArgs e) =>
+        ViewModel.DeleteItemCommand.Execute((sender as FrameworkElement)?.DataContext as OfflineItem);
+
+    private void RetryPending_Click(object sender, RoutedEventArgs e) =>
+        ViewModel.RetryPendingCommand.Execute((sender as FrameworkElement)?.DataContext as PendingOperationRow);
+
+    private void OverwritePending_Click(object sender, RoutedEventArgs e) =>
+        ViewModel.OverwritePendingCommand.Execute((sender as FrameworkElement)?.DataContext as PendingOperationRow);
+
+    private void DiscardPending_Click(object sender, RoutedEventArgs e) =>
+        ViewModel.DiscardPendingCommand.Execute((sender as FrameworkElement)?.DataContext as PendingOperationRow);
 }

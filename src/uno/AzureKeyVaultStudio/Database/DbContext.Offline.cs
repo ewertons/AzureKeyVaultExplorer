@@ -56,9 +56,28 @@ public partial class DbContext
             INSERT INTO OfflineItemsSearch (rowid, Name, Tags, ContentType, VaultName)
             VALUES (new.Id, new.Name, new.Tags, new.ContentType, (SELECT Name FROM OfflineVaults WHERE VaultUri = new.VaultUri));
         END;
+        CREATE TABLE IF NOT EXISTS PendingOperations (
+            Id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            VaultUri        TEXT    NOT NULL,
+            Kind            INTEGER NOT NULL,
+            ItemType        INTEGER NOT NULL,
+            Name            TEXT    NOT NULL COLLATE NOCASE,
+            Value           TEXT,
+            ContentType     TEXT,
+            ExpectedExists  INTEGER NOT NULL,
+            ExpectedUpdatedOn TEXT,
+            Force           INTEGER NOT NULL DEFAULT 0,
+            CreatedOn       TEXT    NOT NULL,
+            Attempts        INTEGER NOT NULL DEFAULT 0,
+            NextAttemptOn   TEXT,
+            Status          INTEGER NOT NULL DEFAULT 0,
+            LastError       TEXT
+        );
+        CREATE INDEX IF NOT EXISTS PendingOperations_Item ON PendingOperations (VaultUri, ItemType, Name);
         """;
 
     private const string DropOfflineSchema = """
+        DROP TABLE IF EXISTS PendingOperations;
         DROP TRIGGER IF EXISTS OfflineItems_ai;
         DROP TRIGGER IF EXISTS OfflineItems_ad;
         DROP TRIGGER IF EXISTS OfflineItems_au;
@@ -174,7 +193,7 @@ public partial class DbContext
         await using var transaction = (SqliteTransaction)await connection.BeginTransactionAsync();
         await using var command = connection.CreateCommand();
         command.Transaction = transaction;
-        command.CommandText = "DELETE FROM OfflineItems WHERE VaultUri = @VaultUri; DELETE FROM OfflineVaults WHERE VaultUri = @VaultUri;";
+        command.CommandText = "DELETE FROM PendingOperations WHERE VaultUri = @VaultUri; DELETE FROM OfflineItems WHERE VaultUri = @VaultUri; DELETE FROM OfflineVaults WHERE VaultUri = @VaultUri;";
         command.Parameters.AddWithValue("@VaultUri", vaultUri);
         await command.ExecuteNonQueryAsync();
         await transaction.CommitAsync();
@@ -296,7 +315,8 @@ public partial class DbContext
 
         var sql = new StringBuilder("""
             SELECT i.Id, i.VaultUri, v.Name, i.Type, i.Name, i.ItemId, i.Version, i.ContentType, i.Enabled,
-                   i.CreatedOn, i.UpdatedOn, i.ExpiresOn, i.Tags, i.SecretValue IS NOT NULL
+                   i.CreatedOn, i.UpdatedOn, i.ExpiresOn, i.Tags, i.SecretValue IS NOT NULL,
+                   EXISTS (SELECT 1 FROM PendingOperations p WHERE p.VaultUri = i.VaultUri AND p.ItemType = i.Type AND p.Name = i.Name)
             FROM OfflineItems i JOIN OfflineVaults v ON v.VaultUri = i.VaultUri
             """);
 
@@ -338,6 +358,7 @@ public partial class DbContext
                 ExpiresOn = ReadDate(reader, 11),
                 Tags = DeserializeTags(reader.IsDBNull(12) ? null : reader.GetString(12)),
                 HasSecretValue = reader.GetInt64(13) != 0,
+                HasPendingChange = reader.GetInt64(14) != 0,
             });
         }
         return items;

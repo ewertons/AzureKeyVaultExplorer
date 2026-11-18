@@ -89,8 +89,35 @@
                                 Glyph="&#xE713;" />
                         </StackPanel>
                     </Button>
+                    <Button AutomationProperties.AutomationId="OfflineStoreButton" Click="OpenOfflineStore_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Uid="LoginPageOfflineStoreText" />
+                            <FontIcon
+                                Margin="10,0,0,0"
+                                FontSize="16"
+                                Glyph="&#xE8F1;" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+
+        <!--  Offline copy, usable without signing in  -->
+        <Grid
+            x:Name="OfflineStoreHost"
+            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+            Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Button
+                x:Uid="LoginPageOfflineBackButton"
+                Margin="16,8"
+                Click="CloseOfflineStore_Click">
+                <FontIcon FontSize="14" Glyph="&#xE72B;" />
+            </Button>
+            <Frame x:Name="OfflineStoreFrame" Grid.Row="1" />
+        </Grid>
     </Grid>
 </Page>

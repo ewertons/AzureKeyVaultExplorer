@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -29,13 +30,21 @@
                     Style="{ThemeResource CaptionTextBlockStyle}"
                     TextWrapping="Wrap" />
             </StackPanel>
-            <Button
-                x:Uid="OfflineSyncAllButton"
+            <StackPanel
                 Grid.Column="1"
                 VerticalAlignment="Top"
-                Command="{x:Bind ViewModel.SyncAllCommand}"
-                IsEnabled="{x:Bind ViewModel.HasVaults, Mode=OneWay}"
-                Style="{ThemeResource AccentButtonStyle}" />
+                Orientation="Horizontal"
+                Spacing="8">
+                <Button
+                    x:Uid="OfflineNewSecretButton"
+                    Command="{x:Bind ViewModel.NewSecretCommand}"
+                    IsEnabled="{x:Bind ViewModel.HasVaults, Mode=OneWay}" />
+                <Button
+                    x:Uid="OfflineSyncAllButton"
+                    Command="{x:Bind ViewModel.SyncAllCommand}"
+                    IsEnabled="{x:Bind ViewModel.HasVaults, Mode=OneWay}"
+                    Style="{ThemeResource AccentButtonStyle}" />
+            </StackPanel>
         </Grid>
 
         <Border
@@ -129,15 +138,106 @@
             </Grid>
         </Border>
 
+        <!--  Pending changes  -->
+        <Border
+            Grid.Row="2"
+            MaxHeight="220"
+            Padding="12,8"
+            Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="{ThemeResource CornerRadiusValue}"
+            Visibility="{x:Bind ViewModel.HasPendingOperations, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid RowSpacing="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <TextBlock x:Uid="OfflinePendingTitle" FontWeight="SemiBold" />
+                    <TextBlock
+                        x:Uid="OfflinePendingDescription"
+                        VerticalAlignment="Center"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Style="{ThemeResource CaptionTextBlockStyle}"
+                        TextWrapping="Wrap" />
+                </StackPanel>
+                <ListView
+                    Grid.Row="1"
+                    ItemsSource="{x:Bind ViewModel.PendingOperations}"
+                    SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:PendingOperationRow">
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock VerticalAlignment="Center" Text="{x:Bind KindText}" />
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" />
+                                    <TextBlock
+                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                        Style="{ThemeResource CaptionTextBlockStyle}"
+                                        Text="{x:Bind TypeText}" />
+                                </StackPanel>
+                                <TextBlock
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    Text="{x:Bind VaultName}"
+                                    TextTrimming="CharacterEllipsis" />
+                                <StackPanel
+                                    Grid.Column="3"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Spacing="6">
+                                    <TextBlock Text="{x:Bind StatusText}" TextTrimming="CharacterEllipsis" />
+                                    <FontIcon
+                                        FontSize="12"
+                                        Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                                        Glyph="&#xE7BA;"
+                                        ToolTipService.ToolTip="{x:Bind LastError}"
+                                        Visibility="{x:Bind HasError, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Grid.Column="4"
+                                    Orientation="Horizontal"
+                                    Spacing="4">
+                                    <Button
+                                        x:Uid="OfflineRetryButton"
+                                        Click="RetryPending_Click"
+                                        Visibility="{x:Bind CanRetry, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <FontIcon FontSize="14" Glyph="&#xE72C;" />
+                                    </Button>
+                                    <Button
+                                        x:Uid="OfflineOverwriteButton"
+                                        Click="OverwritePending_Click"
+                                        Visibility="{x:Bind IsConflict, Converter={StaticResource BoolToVisibilityConverter}}">
+                                        <FontIcon FontSize="14" Glyph="&#xE898;" />
+                                    </Button>
+                                    <Button x:Uid="OfflineDiscardButton" Click="DiscardPending_Click">
+                                        <FontIcon FontSize="14" Glyph="&#xE711;" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+
         <!--  Search  -->
         <AutoSuggestBox
             x:Uid="OfflineSearchBox"
-            Grid.Row="2"
+            Grid.Row="3"
             QueryIcon="Find"
             Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <Grid
-            Grid.Row="3"
+            Grid.Row="4"
             Padding="12,0"
             ColumnSpacing="8">
             <Grid.ColumnDefinitions>
@@ -146,7 +246,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="140" />
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
             <TextBlock x:Uid="DeletedItemsNameHeader" FontWeight="SemiBold" />
             <TextBlock x:Uid="OfflineTypeHeader" Grid.Column="1" FontWeight="SemiBold" />
@@ -163,7 +263,7 @@
         </Grid>
 
         <ListView
-            Grid.Row="4"
+            Grid.Row="5"
             ItemsSource="{x:Bind ViewModel.Results, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.SelectedResult, Mode=TwoWay}"
             SelectionMode="Single">
@@ -176,10 +276,18 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="140" />
-                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="150" />
                         </Grid.ColumnDefinitions>
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" />
+                            <StackPanel Orientation="Horizontal" Spacing="6">
+                                <TextBlock Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" />
+                                <FontIcon
+                                    x:Uid="OfflinePendingIcon"
+                                    FontSize="12"
+                                    Foreground="{ThemeResource SystemFillColorAttentionBrush}"
+                                    Glyph="&#xE823;"
+                                    Visibility="{x:Bind HasPendingChange, Converter={StaticResource BoolToVisibilityConverter}}" />
+                            </StackPanel>
                             <TextBlock
                                 Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                                 Style="{ThemeResource CaptionTextBlockStyle}"
@@ -218,6 +326,15 @@
                                 Click="CopyValue_Click"
                                 IsEnabled="{x:Bind HasSecretValue}">
                                 <FontIcon FontSize="14" Glyph="&#xE8D7;" />
+                            </Button>
+                            <Button
+                                x:Uid="OfflineSetValueButton"
+                                Click="SetSecretValue_Click"
+                                IsEnabled="{x:Bind IsSecret}">
+                                <FontIcon FontSize="14" Glyph="&#xE70F;" />
+                            </Button>
+                            <Button x:Uid="OfflineDeleteItemButton" Click="DeleteItem_Click">
+                                <FontIcon FontSize="14" Glyph="&#xE74D;" />
                             </Button>
                         </StackPanel>
                     </Grid>

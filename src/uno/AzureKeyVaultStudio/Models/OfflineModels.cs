@@ -28,6 +28,11 @@ public sealed class OfflineItem
     public IReadOnlyDictionary<string, string> Tags { get; init; } = new Dictionary<string, string>();
     public bool HasSecretValue { get; init; }
 
+    /// <summary>A queued change for this item hasn't been pushed to Key Vault yet.</summary>
+    public bool HasPendingChange { get; init; }
+
+    public bool IsSecret => Type == KeyVaultItemType.Secret;
+
     public string TypeText => Type.ToString();
     public string UpdatedOnText => UpdatedOn?.ToLocalTime().ToString("g") ?? string.Empty;
     public string TagsText => string.Join(", ", Tags.Select(t => $"{t.Key}={t.Value}"));
