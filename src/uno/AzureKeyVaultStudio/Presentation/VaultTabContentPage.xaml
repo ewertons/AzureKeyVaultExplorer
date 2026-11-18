@@ -57,7 +57,7 @@
                     <DropDownButton.Flyout>
                         <MenuFlyout Placement="Bottom">
                             <MenuFlyoutItem x:Uid="NewSecretButton" Command="{x:Bind ViewModel.NewSecretCommand, Mode=OneWay}" />
-                            <MenuFlyoutItem IsEnabled="False" Text="Key.." />
+                            <MenuFlyoutItem x:Uid="NewKeyButton" Command="{x:Bind ViewModel.NewKeyCommand, Mode=OneWay}" />
                             <MenuFlyoutItem IsEnabled="False" Text="Certificate.." />
                         </MenuFlyout>
                     </DropDownButton.Flyout>
@@ -222,6 +222,15 @@
                                     CommandParameter="{x:Bind ViewModel.SelectedRow, Mode=OneWay}"
                                     Icon="Link" />
                                 <MenuFlyoutSeparator />
+                                <MenuFlyoutItem
+                                    x:Name="VaultPageRotateKeyButton"
+                                    x:Uid="VaultPageRotateKeyButton"
+                                    Command="{x:Bind ViewModel.RotateKeyCommand, Mode=OneWay}"
+                                    CommandParameter="{x:Bind ViewModel.SelectedRow, Mode=OneWay}">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE895;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
                                 <MenuFlyoutItem
                                     x:Name="VaultPageDeleteButton"
                                     x:Uid="VaultPageDeleteButton"

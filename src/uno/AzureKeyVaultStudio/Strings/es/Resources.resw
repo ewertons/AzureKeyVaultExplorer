@@ -792,4 +792,67 @@
   <data name="PurgePermissionHint" xml:space="preserve">
     <value>Purgar requiere el permiso 'purge' (o el rol Key Vault Purge Operator / Administrator) y está bloqueado cuando la protección de purga está habilitada.</value>
   </data>
+  <data name="NewKeyButton.Text" xml:space="preserve">
+    <value>Clave..</value>
+  </data>
+  <data name="NewKeyWindowTitle" xml:space="preserve">
+    <value>Nueva clave</value>
+  </data>
+  <data name="NewKeyTitle.Text" xml:space="preserve">
+    <value>Crear clave</value>
+  </data>
+  <data name="KeyNameTextBlock.Text" xml:space="preserve">
+    <value>Nombre de la clave</value>
+  </data>
+  <data name="NewKeyNameTextBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Los nombres de clave solo pueden contener caracteres alfanuméricos y guiones (1-127 caracteres).</value>
+  </data>
+  <data name="KeyTypeTextBlock.Text" xml:space="preserve">
+    <value>Tipo de clave</value>
+  </data>
+  <data name="KeySizeTextBlock.Text" xml:space="preserve">
+    <value>Tamaño de clave RSA</value>
+  </data>
+  <data name="KeyCurveTextBlock.Text" xml:space="preserve">
+    <value>Curva elíptica</value>
+  </data>
+  <data name="KeyOperationsTextBlock.Text" xml:space="preserve">
+    <value>Operaciones permitidas</value>
+  </data>
+  <data name="ItemNameInvalidMessage" xml:space="preserve">
+    <value>Los nombres deben tener entre 1 y 127 caracteres y contener solo letras, dígitos y guiones.</value>
+  </data>
+  <data name="KeySizeInvalidMessage" xml:space="preserve">
+    <value>Seleccione un tamaño de clave RSA compatible.</value>
+  </data>
+  <data name="KeyCurveInvalidMessage" xml:space="preserve">
+    <value>Seleccione una curva elíptica compatible.</value>
+  </data>
+  <data name="KeyOperationsRequiredMessage" xml:space="preserve">
+    <value>Seleccione al menos una operación permitida.</value>
+  </data>
+  <data name="ExpiryBeforeActivationMessage" xml:space="preserve">
+    <value>La fecha de expiración debe ser posterior a la fecha de activación.</value>
+  </data>
+  <data name="KeyCreatedMessage" xml:space="preserve">
+    <value>Se creó la clave '{0}'.</value>
+  </data>
+  <data name="VaultPageRotateKeyButton.Text" xml:space="preserve">
+    <value>Rotar clave</value>
+  </data>
+  <data name="RotateKeyConfirmTitle" xml:space="preserve">
+    <value>¿Rotar la clave?</value>
+  </data>
+  <data name="RotateKeyConfirmMessage" xml:space="preserve">
+    <value>¿Crear ahora una nueva versión de '{0}'? Las aplicaciones que fijan una versión específica seguirán usando la anterior.</value>
+  </data>
+  <data name="RotateKeyButtonText" xml:space="preserve">
+    <value>Rotar</value>
+  </data>
+  <data name="KeyRotatedMessage" xml:space="preserve">
+    <value>Se rotó la clave '{0}'.</value>
+  </data>
+  <data name="RotatePermissionHint" xml:space="preserve">
+    <value>Rotar requiere el permiso de clave 'rotate' (o el rol Key Vault Crypto Officer).</value>
+  </data>
 </root>

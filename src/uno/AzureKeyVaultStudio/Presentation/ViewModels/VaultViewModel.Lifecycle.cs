@@ -80,17 +80,7 @@ public partial class VaultViewModel
             return;
 
         var vm = new DeletedItemsViewModel(_vaultService!, _localizer);
-        vm.ItemRecovered += async (_, _) =>
-        {
-            try
-            {
-                await RefreshCommand.ExecuteAsync(null);
-            }
-            catch (Exception ex)
-            {
-                ShowInAppNotification(_localizer["NewItemErrorTitle"], ex.Message, InfoBarSeverity.Error);
-            }
-        };
+        vm.ItemRecovered += async (_, _) => await RefreshAfterChangeAsync();
         vm.Initialize(VaultUri, SelectedTab);
 
         var window = new SharedWindow

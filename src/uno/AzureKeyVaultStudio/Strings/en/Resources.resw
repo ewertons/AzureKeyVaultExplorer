@@ -792,4 +792,67 @@
   <data name="PurgePermissionHint" xml:space="preserve">
     <value>Purging requires the 'purge' permission (or the Key Vault Purge Operator / Administrator role) and is blocked when purge protection is enabled.</value>
   </data>
+  <data name="NewKeyButton.Text" xml:space="preserve">
+    <value>Key..</value>
+  </data>
+  <data name="NewKeyWindowTitle" xml:space="preserve">
+    <value>New Key</value>
+  </data>
+  <data name="NewKeyTitle.Text" xml:space="preserve">
+    <value>Create Key</value>
+  </data>
+  <data name="KeyNameTextBlock.Text" xml:space="preserve">
+    <value>Key Name</value>
+  </data>
+  <data name="NewKeyNameTextBox.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Key names can only contain alphanumeric characters and dashes (1-127 characters).</value>
+  </data>
+  <data name="KeyTypeTextBlock.Text" xml:space="preserve">
+    <value>Key Type</value>
+  </data>
+  <data name="KeySizeTextBlock.Text" xml:space="preserve">
+    <value>RSA Key Size</value>
+  </data>
+  <data name="KeyCurveTextBlock.Text" xml:space="preserve">
+    <value>Elliptic Curve</value>
+  </data>
+  <data name="KeyOperationsTextBlock.Text" xml:space="preserve">
+    <value>Permitted Operations</value>
+  </data>
+  <data name="ItemNameInvalidMessage" xml:space="preserve">
+    <value>Names must be 1-127 characters and contain only letters, digits and dashes.</value>
+  </data>
+  <data name="KeySizeInvalidMessage" xml:space="preserve">
+    <value>Select a supported RSA key size.</value>
+  </data>
+  <data name="KeyCurveInvalidMessage" xml:space="preserve">
+    <value>Select a supported elliptic curve.</value>
+  </data>
+  <data name="KeyOperationsRequiredMessage" xml:space="preserve">
+    <value>Select at least one permitted operation.</value>
+  </data>
+  <data name="ExpiryBeforeActivationMessage" xml:space="preserve">
+    <value>The expiration date must be after the activation date.</value>
+  </data>
+  <data name="KeyCreatedMessage" xml:space="preserve">
+    <value>The key '{0}' has been created.</value>
+  </data>
+  <data name="VaultPageRotateKeyButton.Text" xml:space="preserve">
+    <value>Rotate key</value>
+  </data>
+  <data name="RotateKeyConfirmTitle" xml:space="preserve">
+    <value>Rotate key?</value>
+  </data>
+  <data name="RotateKeyConfirmMessage" xml:space="preserve">
+    <value>Create a new version of '{0}' now? Applications that pin a specific key version will keep using the old one.</value>
+  </data>
+  <data name="RotateKeyButtonText" xml:space="preserve">
+    <value>Rotate</value>
+  </data>
+  <data name="KeyRotatedMessage" xml:space="preserve">
+    <value>The key '{0}' has been rotated.</value>
+  </data>
+  <data name="RotatePermissionHint" xml:space="preserve">
+    <value>Rotating requires the 'rotate' key permission (or the Key Vault Crypto Officer role).</value>
+  </data>
 </root>
