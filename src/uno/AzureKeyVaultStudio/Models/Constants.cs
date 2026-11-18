@@ -49,6 +49,13 @@ public static class Constants
     public static readonly KeyValuePair<string, string> LinuxKeyRingAttr1 = new KeyValuePair<string, string>("Version", "2");
     public static readonly KeyValuePair<string, string> LinuxKeyRingAttr2 = new KeyValuePair<string, string>("ProductGroup", "MyApps");
 
+    // Linux: the database password lives in the Secret Service keyring (separate schema from the token cache).
+    public const string LinuxDatabaseKeyRingSchema = $"io.github.cricketthomas.{AppName}.database";
+    public const string LinuxDatabaseKeyRingLabel = "Database password for Key Vault Explorer for Azure.";
+    public const string LinuxDatabaseKeyRingMarkerFileName = $"{AppName}_database_password.keyring";
+    // Used only when no keyring is available (e.g. headless sessions); created with 0600 permissions.
+    public const string LinuxDatabasePasswordFallbackFileName = $"{AppName}_database_password.key";
+
     private static bool IsPackaged()
     {
         if (!OperatingSystem.IsWindows())
