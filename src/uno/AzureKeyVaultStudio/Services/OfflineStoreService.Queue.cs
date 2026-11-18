@@ -173,6 +173,9 @@ public sealed partial class OfflineStoreService
         try
         {
             await DbContext.DeletePendingOperationAsync(operation.Id);
+            // The next change for this item was based on the discarded one; base it on what that one expected,
+            // so it can't overwrite remote changes unnoticed.
+            await RebaseNextAsync(operation, operation.ExpectedExists, operation.ExpectedUpdatedOn);
         }
         finally
         {
@@ -180,6 +183,13 @@ public sealed partial class OfflineStoreService
         }
 
         NotifyChanged(operation.VaultUri);
+    }
+
+    private static async Task RebaseNextAsync(PendingOperation previous, bool expectedExists, DateTimeOffset? expectedUpdatedOn)
+    {
+        var next = PendingOperationPolicy.NextForSameItem(await DbContext.GetPendingOperationsAsync(previous.VaultUri), previous);
+        if (next is not null)
+            await DbContext.RebasePendingOperationAsync(next.Id, expectedExists, expectedUpdatedOn);
     }
 
     private static async Task<List<PendingOperation>> GetQueuedForItemAsync(string vaultUri, KeyVaultItemType type, string name) =>
@@ -228,19 +238,22 @@ public sealed partial class OfflineStoreService
                             break;
 
                         case PendingPushDecision.Apply when operation.Kind == PendingOperationKind.SetSecret:
-                            await _vaultService.SetSecretValueAsync(uri, operation.Name, operation.Value ?? string.Empty, operation.ContentType, cancellationToken);
+                            var written = await _vaultService.SetSecretValueAsync(uri, operation.Name, operation.Value ?? string.Empty, operation.ContentType, cancellationToken);
                             await DbContext.DeletePendingOperationAsync(operation.Id);
+                            await RebaseNextAsync(operation, expectedExists: true, written.UpdatedOn);
                             pushed++;
                             break;
 
                         case PendingPushDecision.Apply:
                             await _vaultService.DeleteItemAsync(operation.ItemType, uri, operation.Name, cancellationToken);
                             await DbContext.DeletePendingOperationAsync(operation.Id);
+                            await RebaseNextAsync(operation, expectedExists: false, null);
                             pushed++;
                             break;
 
                         case PendingPushDecision.AlreadyApplied:
                             await DbContext.DeletePendingOperationAsync(operation.Id);
+                            await RebaseNextAsync(operation, expectedExists: false, null);
                             pushed++;
                             break;
                     }
