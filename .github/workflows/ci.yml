@@ -67,10 +67,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 10.0.x
-      - name: Restore workloads
-        if: runner.os == 'macOS'
-        working-directory: src/uno/AzureKeyVaultStudio
-        run: dotnet workload restore
       - name: Build
         working-directory: src/uno/AzureKeyVaultStudio
         run: dotnet build AzureKeyVaultStudio.csproj -c Release -f ${{ matrix.framework }}
