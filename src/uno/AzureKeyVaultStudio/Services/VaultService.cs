@@ -28,7 +28,7 @@ public partial class VaultService
         var result = await _authService.GetAzureKeyVaultTokenSilent();
         if (result is null)
             throw new AuthenticationRequiredException("No accounts logged in. Please sign in to continue.");
-        return new CustomTokenCredential(result);
+        return new CustomTokenCredential(result, KeyVaultEndpoints.IsKeyVaultScope);
     }
 
     private async ValueTask<ArmClient> GetOrCreateArmClient()

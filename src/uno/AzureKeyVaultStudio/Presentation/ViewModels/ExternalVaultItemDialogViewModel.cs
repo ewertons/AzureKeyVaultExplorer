@@ -50,10 +50,12 @@ public partial class ExternalVaultItemDialogViewModel : ObservableValidator
     [RelayCommand]
     private async Task Submit()
     {
-        var itemUri = new Uri(ExternalItemVaultUri);
         IReadOnlyList<KeyVaultItemProperties> item;
         try
         {
+            if (!Uri.TryCreate(ExternalItemVaultUri?.Trim(), UriKind.Absolute, out var itemUri) || !KeyVaultEndpoints.IsKeyVaultUri(itemUri))
+                throw new InvalidOperationException(_localizer["ExternalItemVaultUriInvalidMessage"] ?? "Enter a Key Vault URL, for example https://contoso.vault.azure.net/.");
+
             if (SelectedItemType.Type == KeyVaultItemType.Secret)
                 item = KeyVaultItemProperties.FromSecretProperties(await _vaultService.GetSecretProperties(name: ExternalItemVaultName, keyVaultUri: itemUri));
             else if (SelectedItemType.Type == KeyVaultItemType.Key)

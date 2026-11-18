@@ -1,3 +1,4 @@
+using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using AzureKeyVaultStudio.Extensions;
@@ -11,9 +12,7 @@ public static class DatabaseEncryptedPasswordManager
     {
         if (OperatingSystem.IsWindows())
         {
-            byte[] storedProtectedKey = GetProtectedKey();
-            byte[] entropySource = GetMachineEntropy();
-            byte[] unprotectedKey = ProtectedData.Unprotect(storedProtectedKey, entropySource, DataProtectionScope.LocalMachine);
+            byte[] unprotectedKey = GetDataKey();
 
             string encryptedSecretPath = Path.Combine(Constants.LocalAppDataFolder, Constants.EncryptedSecretFileName);
             if (!File.Exists(encryptedSecretPath))
@@ -69,9 +68,7 @@ public static class DatabaseEncryptedPasswordManager
 
         if (OperatingSystem.IsWindows())
         {
-            byte[] protectedKey = GetProtectedKey();
-            byte[] entropySource = GetMachineEntropy();
-            byte[] unprotectedKey = ProtectedData.Unprotect(protectedKey, entropySource, DataProtectionScope.LocalMachine);
+            byte[] unprotectedKey = GetDataKey();
 
             using var aes = Aes.Create();
             aes.Key = unprotectedKey;
@@ -93,43 +90,55 @@ public static class DatabaseEncryptedPasswordManager
         }
     }
 
-    private static byte[] GetMachineEntropy()
+    /// <summary>
+    /// Returns the AES key that encrypts the database password, creating it on first use. The key is protected
+    /// with DPAPI in the current user's scope, so other accounts on the same machine can't unprotect it.
+    /// </summary>
+    [SupportedOSPlatform("windows")]
+    private static byte[] GetDataKey()
     {
-        string deviceId = new DeviceIdBuilder().AddMachineName().AddOsVersion().AddFileToken(Path.Combine(Constants.LocalAppDataFolder, Constants.DeviceFileTokenName)).ToString();
-        return deviceId.ToByteArray();
-    }
+        string protectedKeyPath = Path.Combine(Constants.LocalAppDataFolder, Constants.ProtectedKeyFileName);
+        byte[] entropy = GetUserEntropy();
 
-    private static byte[] GetProtectedKey()
-    {
-        if (OperatingSystem.IsWindows())
+        if (File.Exists(protectedKeyPath))
         {
-            string protectedKeyPath = Path.Combine(Constants.LocalAppDataFolder, Constants.ProtectedKeyFileName);
-            string directoryPath = Path.GetDirectoryName(protectedKeyPath);
-
-            if (File.Exists(protectedKeyPath))
+            byte[] protectedKey = File.ReadAllBytes(protectedKeyPath);
+            try
             {
-                return File.ReadAllBytes(protectedKeyPath);
+                return ProtectedData.Unprotect(protectedKey, entropy, DataProtectionScope.CurrentUser);
             }
-            if (!Directory.Exists(directoryPath))
+            catch (CryptographicException)
             {
-                Directory.CreateDirectory(directoryPath);
+                // Earlier versions protected the key in the machine scope; move it to the user scope.
+                byte[] key = ProtectedData.Unprotect(protectedKey, GetLegacyMachineEntropy(), DataProtectionScope.LocalMachine);
+                WriteProtectedKey(protectedKeyPath, key, entropy);
+                return key;
             }
-
-            byte[] key = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(key);
-            }
-
-            byte[] entropySource = GetMachineEntropy();
-
-            byte[] protectedKey = ProtectedData.Protect(key, entropySource, DataProtectionScope.LocalMachine);
-            File.WriteAllBytes(protectedKeyPath, protectedKey);
-            return protectedKey;
-            // if linux or macOS then use an empty string as the password
         }
-        return new byte[32];
+
+        byte[] newKey = RandomNumberGenerator.GetBytes(32);
+        WriteProtectedKey(protectedKeyPath, newKey, entropy);
+        return newKey;
     }
+
+    [SupportedOSPlatform("windows")]
+    private static void WriteProtectedKey(string protectedKeyPath, byte[] key, byte[] entropy)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(protectedKeyPath)!);
+        byte[] protectedKey = ProtectedData.Protect(key, entropy, DataProtectionScope.CurrentUser);
+        string tempPath = protectedKeyPath + ".tmp";
+        File.WriteAllBytes(tempPath, protectedKey);
+        File.Move(tempPath, protectedKeyPath, overwrite: true);
+    }
+
+    private static string DeviceFileTokenPath => Path.Combine(Constants.LocalAppDataFolder, Constants.DeviceFileTokenName);
+
+    // A random per-install token. It doesn't include the OS version, so Windows updates don't lock the key.
+    private static byte[] GetUserEntropy() =>
+        new DeviceIdBuilder().AddFileToken(DeviceFileTokenPath).ToString().ToByteArray();
+
+    private static byte[] GetLegacyMachineEntropy() =>
+        new DeviceIdBuilder().AddMachineName().AddOsVersion().AddFileToken(DeviceFileTokenPath).ToString().ToByteArray();
 
     public static void PurgePasswords()
     {
@@ -155,8 +164,8 @@ public static class DatabaseEncryptedPasswordManager
             if (File.Exists(Constants.DatabasePasswordFilePath))
                 File.Delete(Constants.DatabasePasswordFilePath);
 
-            if (File.Exists(Constants.DeviceFileTokenName))
-                File.Delete(Constants.DeviceFileTokenName);
+            if (File.Exists(DeviceFileTokenPath))
+                File.Delete(DeviceFileTokenPath);
         }
     }
 }

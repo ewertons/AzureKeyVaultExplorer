@@ -30,7 +30,7 @@ on:
       - master
 
 permissions:
-  contents: write
+  contents: read
 
 env:
   STEP_TIMEOUT_MINUTES: 60
@@ -48,14 +48,23 @@ jobs:
       - name: Resolve version
         id: version
         shell: pwsh
+        # Inputs are passed through the environment so their text is never parsed as part of the script.
+        env:
+          INPUT_MAJOR_VERSION: ${{ github.event.inputs.major_version }}
+          INPUT_MINOR_VERSION: ${{ github.event.inputs.minor_version }}
+          INPUT_VERSION: ${{ github.event.inputs.version }}
         run: |
-          $major = '${{ github.event.inputs.major_version }}'.Trim()
-          $minor = '${{ github.event.inputs.minor_version }}'.Trim()
-          $versionInput = '${{ github.event.inputs.version }}'
+          $major = "$env:INPUT_MAJOR_VERSION".Trim()
+          $minor = "$env:INPUT_MINOR_VERSION".Trim()
+          $versionInput = "$env:INPUT_VERSION"
           $version = ($versionInput -replace '^v', '').Trim()
 
           if ([string]::IsNullOrWhiteSpace($major)) { $major = '2' }
           if ([string]::IsNullOrWhiteSpace($minor)) { $minor = '2' }
+
+          if ($major -notmatch '^\d+$' -or $minor -notmatch '^\d+$') {
+            throw "Major and minor versions must be numbers."
+          }
 
           if ([string]::IsNullOrWhiteSpace($version)) {
             $version = "$major.$minor.${{ github.run_number }}"
@@ -250,6 +259,8 @@ jobs:
     needs: [prepare_version, build_windows_x64, build_windows_arm64, build_macos_x64, build_macos_arm64, build_linux]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.event.inputs.run_release == 'true'
+    permissions:
+      contents: write
     env:
       APP_VERSION_NUMBER: ${{ needs.prepare_version.outputs.version }}
     steps:

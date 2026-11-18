@@ -723,4 +723,7 @@
   <data name="ExpiredTextBlock.Text" xml:space="preserve">
     <value>Abgelaufen</value>
   </data>
+  <data name="ExternalItemVaultUriInvalidMessage" xml:space="preserve">
+    <value>Geben Sie eine Key Vault-URL ein, z. B. https://contoso.vault.azure.net/.</value>
+  </data>
 </root>

@@ -170,16 +170,30 @@ public static class MacOSKeyChainService
 
     private static void SaveToKeychainCli(string service, string account, string password)
     {
-        var psi = new ProcessStartInfo("security",
-            $"add-generic-password -a {EscapeArg(account)} -s {EscapeArg(service)} -w {EscapeArg(password)} -U")
+        // Interactive mode has its own quoting rules; refuse anything that could break out of the quoted values.
+        char[] unsafeChars = ['"', '\\', '\r', '\n', '\0'];
+        if (password.IndexOfAny(unsafeChars) >= 0 || account.IndexOfAny(unsafeChars) >= 0 || service.IndexOfAny(unsafeChars) >= 0)
+            throw new ArgumentException("The keychain values contain characters the security CLI fallback can't pass safely.");
+
+        // Send the command through interactive mode so the password never appears in the process arguments,
+        // where other local processes could read it.
+        var psi = new ProcessStartInfo("security", "-i")
         {
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false
         };
         using var proc = Process.Start(psi);
+        var stdout = proc.StandardOutput.ReadToEndAsync();
+        var stderr = proc.StandardError.ReadToEndAsync();
+        proc.StandardInput.Write($"add-generic-password -a {EscapeArg(account)} -s {EscapeArg(service)} -w {EscapeArg(password)} -U\n");
+        proc.StandardInput.Close();
         proc.WaitForExit();
-        if (proc.ExitCode != 0)
-            throw new Exception($"security CLI add-generic-password failed: {proc.StandardError.ReadToEnd()}");
+        stdout.Wait();
+
+        if (proc.ExitCode != 0 || GetPasswordCli(service, account) != password)
+            throw new Exception($"security CLI add-generic-password failed: {stderr.Result}");
     }
     [DllImport(SecurityLibrary)]
     private static extern int SecKeychainAddGenericPassword(
