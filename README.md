@@ -113,6 +113,4 @@ Installer built with: [Master Packager Dev](https://www.masterpackager.com/maste
 
 ### Dependencies
 - **[.NET 10](https://github.com/dotnet/runtime)**
-- **[Avalonia](https://github.com/AvaloniaUI/Avalonia/)** 
 - **[Uno Platform](https://github.com/unoplatform/uno)** 
-- **[FluentAvalonia](https://github.com/amwx/FluentAvalonia/)**

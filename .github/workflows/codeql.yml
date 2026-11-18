@@ -77,7 +77,6 @@ jobs:
     - if: matrix.build-mode == 'manual'
       shell: pwsh
       run: |
-          dotnet build src/avalonia/kv.sln;
           dotnet build src/uno/AzureKeyVaultStudio.slnx
         
     - name: Perform CodeQL Analysis

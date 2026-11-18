@@ -1,10 +1,8 @@
 ## Building from source / Running the application
 
-You will need the latest version of the .NET 10 SDK, and Visual Studio 2026 (this can be downloaded from the Microsoft Store).
+You will need the latest version of the .NET 10 SDK, and optionally Visual Studio 2026 (this can be downloaded from the Microsoft Store) or VS Code with the Uno Platform extension.
 
-Clone the project, open the `.\AzureKeyVaultExplorer` directory and open the solution file called "kv.sln" or "AzureKeyVaultStudio.slnx" for version 2. 
-
-You will also need to make sure you have the latest AvaloniaUI and Uno Platform extensions installed.
+Clone the project, open the `.\AzureKeyVaultExplorer` directory and open the solution file `src/uno/AzureKeyVaultStudio.slnx`.
 
 ### You can also download from the [releases](https://github.com/cricketthomas/AzureKeyVaultExplorer/releases) section for exe and macOS versions.
 If downloaded from this section, you will need to follow this guide to run the app: https://github.com/cricketthomas/AzureKeyVaultExplorer/discussions/67#discussioncomment-10014603
@@ -21,22 +19,15 @@ Install the latest .NET 10 SDK: https://dotnet.microsoft.com/en-us/download/dotn
 
 3. `git clone https://github.com/cricketthomas/AzureKeyVaultExplorer.git` (to clone/download the sources)
 
-4. `cd AzureKeyVaultExplorer` (to get into the freshly cloned repo)
+4. `cd AzureKeyVaultExplorer/src/uno/AzureKeyVaultStudio` (to get into the application project)
 
-5. `.\build.ps1 -RunBuild -Platform net8.0 -Runtime win-x64` (other platforms include win-arm64, osx-x64, osx-arm64, linux-x64). 
-<strong>To build a self contained `.exe` please run `.\build.ps1 -Runtime win-x64 -PublishAot:$false`, you can ignore the `.pdb` files. </strong>
+5. Run the app for your platform:
+   - Any OS (Skia desktop): `dotnet run -f net10.0-desktop`
+   - Windows (WinAppSDK): `dotnet run -f net10.0-windows10.0.26100`
 
-If you get an error message stating "Platform linker not found" when building on Windows, please ensure you have all the required prerequisites documented at https://aka.ms/nativeaot-prerequisites, in particular the Desktop Development for C++ workload in Visual Studio. 
-
-Open the Visual Studio Installer, Modify, install Desktop Development for C++
-<img width="800" src="https://github.com/user-attachments/assets/867c043e-ba41-4b3e-bc68-5ef2c56f2cff"/>
-
-For ARM64 development also install C++ ARM64 build tools. 
-<img width="600" src="https://github.com/user-attachments/assets/0ddb7ef8-1378-4258-af50-d877093f121a"/>
-
-Repeat step 5. The build starts and might take a couple of minutes. The final output looks something like this: `Desktop -> C:\Repos\AzureKeyVaultExplorer\publish\`
-
-6. Open that folder in Windows Explorer and run `keyvaultexplorerdesktop.exe`. On macOS, a `Key Vault Explorer.app` mac os package will be generated in the publish directory. Move this to "Applications", you will have to force open the app using System Preferences, and click "Open anyway".
+6. To produce a self-contained build, use `dotnet publish` with a runtime identifier (win-x64, win-arm64, osx-x64, osx-arm64, linux-x64), for example:
+   `dotnet publish -f net10.0-desktop -r linux-x64 -p:SelfContained=true -c Release`
+   See [.github/workflows/uno-dotnet.yml](../.github/workflows/uno-dotnet.yml) for the exact commands used for each released platform.
 
 7. It will launch your default browser window and prompt you to login and grant consent. 
 
