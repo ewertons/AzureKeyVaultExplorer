@@ -57,6 +57,14 @@
                         <FontIcon Glyph="&#xE72D;" />
                     </MenuFlyoutItem.Icon>
                 </MenuFlyoutItem>
+                <MenuFlyoutItem
+                    x:Uid="MakeAvailableOfflineMenuFlyoutItem"
+                    Command="{x:Bind ViewModel.MakeVaultAvailableOfflineCommand}"
+                    Tag="NodeParameter">
+                    <MenuFlyoutItem.Icon>
+                        <FontIcon Glyph="&#xE8F1;" />
+                    </MenuFlyoutItem.Icon>
+                </MenuFlyoutItem>
                 <MenuFlyoutSeparator />
                 <MenuFlyoutItem
                     x:Uid="DeleteVaultMenuFlyoutItem"

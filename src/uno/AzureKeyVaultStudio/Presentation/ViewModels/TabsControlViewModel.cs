@@ -186,4 +186,23 @@ public partial class TabsControlViewModel : ObservableRecipient
 
         Messenger.Send(new AddTabMessage(customTab));
     }
+
+    [RelayCommand]
+    private void OpenOfflineStore()
+    {
+        var existing = Tabs.OfType<OfflineStoreTab>().FirstOrDefault();
+        if (existing is not null)
+        {
+            SelectedTab = existing;
+            return;
+        }
+
+        var services = (Application.Current as App)?.Host?.Services;
+        var localizer = services?.GetService<IStringLocalizer>();
+        Messenger.Send(new AddTabMessage(new OfflineStoreTab
+        {
+            Header = localizer?["OfflineStoreTabHeader"] ?? "Offline store",
+            Icon = Symbol.Library,
+        }));
+    }
 }

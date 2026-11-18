@@ -1035,4 +1035,88 @@
   <data name="VaultPurgePermissionHint" xml:space="preserve">
     <value>Purging a vault requires Microsoft.KeyVault/locations/deletedVaults/purge/action on the subscription.</value>
   </data>
+  <data name="OfflineStoreTitle.Text" xml:space="preserve">
+    <value>Offline store</value>
+  </data>
+  <data name="OfflineStoreDescription.Text" xml:space="preserve">
+    <value>Vaults listed here are copied to an encrypted database on this device so you can search them without a connection. Secret values are stored only for vaults where you turn them on.</value>
+  </data>
+  <data name="OfflineSyncAllButton.Content" xml:space="preserve">
+    <value>Sync all</value>
+  </data>
+  <data name="OfflineVaultHeader.Text" xml:space="preserve">
+    <value>Vault</value>
+  </data>
+  <data name="OfflineLastSyncedHeader.Text" xml:space="preserve">
+    <value>Last synced</value>
+  </data>
+  <data name="OfflineSecretValuesHeader.Text" xml:space="preserve">
+    <value>Store secret values</value>
+  </data>
+  <data name="OfflineSyncVaultButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Sync now</value>
+  </data>
+  <data name="OfflineRemoveVaultIconButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Remove from offline store</value>
+  </data>
+  <data name="OfflineNoVaultsText.Text" xml:space="preserve">
+    <value>No vaults are available offline yet. Right-click a vault in the tree and choose "Make available offline".</value>
+  </data>
+  <data name="OfflineSearchBox.PlaceholderText" xml:space="preserve">
+    <value>Search by name, tag, content type or vault</value>
+  </data>
+  <data name="OfflineTypeHeader.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="OfflineTagsHeader.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="OfflineUpdatedHeader.Text" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="OfflineCopyNameButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Copy name</value>
+  </data>
+  <data name="OfflineCopyValueButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Copy stored secret value</value>
+  </data>
+  <data name="OfflineStoreMenuItem.Text" xml:space="preserve">
+    <value>Offline store</value>
+  </data>
+  <data name="MakeAvailableOfflineMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Make available offline</value>
+  </data>
+  <data name="OfflineStoreTabHeader" xml:space="preserve">
+    <value>Offline store</value>
+  </data>
+  <data name="OfflineNeverSynced" xml:space="preserve">
+    <value>Never</value>
+  </data>
+  <data name="OfflineResultsTruncated" xml:space="preserve">
+    <value>First {0} matches shown</value>
+  </data>
+  <data name="OfflineResultsCount" xml:space="preserve">
+    <value>{0} items</value>
+  </data>
+  <data name="OfflineRemoveVaultConfirmTitle" xml:space="preserve">
+    <value>Remove from offline store?</value>
+  </data>
+  <data name="OfflineRemoveVaultConfirmMessage" xml:space="preserve">
+    <value>The offline copy of '{0}' will be deleted from this device, including any stored secret values. The vault in Azure is not affected.</value>
+  </data>
+  <data name="OfflineRemoveVaultButton" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="OfflineSyncCompletedTitle" xml:space="preserve">
+    <value>Offline sync complete</value>
+  </data>
+  <data name="OfflineSyncCompletedMessage" xml:space="preserve">
+    <value>Vaults synced: {0}</value>
+  </data>
+  <data name="OfflineSyncWarningTitle" xml:space="preserve">
+    <value>Offline sync finished with problems</value>
+  </data>
+  <data name="OfflineVaultAddedMessage" xml:space="preserve">
+    <value>'{0}' was added to the offline store. Syncing now…</value>
+  </data>
 </root>

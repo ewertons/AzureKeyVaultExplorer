@@ -106,6 +106,10 @@ public sealed partial class TabsControl : UserControl
                 case PasswordGeneratorTab passwordTab:
                     NavigateIfNeeded(frame, typeof(PasswordGeneratorPage), passwordTab);
                     break;
+
+                case OfflineStoreTab offlineTab:
+                    NavigateIfNeeded(frame, typeof(OfflineStorePage), offlineTab);
+                    break;
                     //case PasswordGeneratorTab passwordTab:
                     //    NavigateIfNeeded(frame, typeof(PasswordGeneratorPage), passwordTab);
                     //    break;
@@ -137,6 +141,7 @@ public sealed partial class TabsControl : UserControl
         {
             VaultTabContainer => typeof(VaultTabContentPage),
             PasswordGeneratorTab => typeof(PasswordGeneratorPage),
+            OfflineStoreTab => typeof(OfflineStorePage),
             _ => null
         };
     }

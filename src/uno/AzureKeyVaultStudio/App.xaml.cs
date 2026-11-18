@@ -156,6 +156,7 @@ public partial class App : Application
                  services.AddSingleton<ILocalSettingsService>(_ => LocalSettingsServiceFactory.Create());
                  services.AddSingleton<AuthService>();
                  services.AddSingleton<VaultService>();
+                 services.AddSingleton<OfflineStoreService>();
                  services.AddSingleton<KeyVaultTreeViewModel>();
                  services.AddTransient<ItemPropertiesViewModel>();
              }).UseNavigation(RegisterRoutes));

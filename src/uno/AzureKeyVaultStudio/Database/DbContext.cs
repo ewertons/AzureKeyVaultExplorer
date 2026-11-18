@@ -262,6 +262,7 @@ public partial class DbContext : IDisposable
         var deleteTableCommand = connection.CreateCommand();
         deleteTableCommand.CommandText = deleteCommand;
         await deleteTableCommand.ExecuteNonQueryAsync();
+        await DropOfflineTablesAsync(connection);
         await InitializeDatabase();
     }
 
@@ -276,6 +277,7 @@ public partial class DbContext : IDisposable
             DatabaseEncryptedPasswordManager.PurgePasswords();
             // The stored password was purged; don't keep using the stale one for a recreated database.
             _password = null;
+            _offlineSchemaReady = false;
         }
     }
 }

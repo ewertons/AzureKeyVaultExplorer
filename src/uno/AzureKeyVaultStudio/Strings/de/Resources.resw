@@ -1035,4 +1035,88 @@
   <data name="VaultPurgePermissionHint" xml:space="preserve">
     <value>Zum endgültigen Löschen eines Tresors ist Microsoft.KeyVault/locations/deletedVaults/purge/action für das Abonnement erforderlich.</value>
   </data>
+  <data name="OfflineStoreTitle.Text" xml:space="preserve">
+    <value>Offlinespeicher</value>
+  </data>
+  <data name="OfflineStoreDescription.Text" xml:space="preserve">
+    <value>Die hier aufgeführten Tresore werden in eine verschlüsselte Datenbank auf diesem Gerät kopiert, damit Sie sie ohne Verbindung durchsuchen können. Geheimniswerte werden nur für Tresore gespeichert, bei denen Sie dies aktivieren.</value>
+  </data>
+  <data name="OfflineSyncAllButton.Content" xml:space="preserve">
+    <value>Alle synchronisieren</value>
+  </data>
+  <data name="OfflineVaultHeader.Text" xml:space="preserve">
+    <value>Tresor</value>
+  </data>
+  <data name="OfflineLastSyncedHeader.Text" xml:space="preserve">
+    <value>Zuletzt synchronisiert</value>
+  </data>
+  <data name="OfflineSecretValuesHeader.Text" xml:space="preserve">
+    <value>Geheimniswerte speichern</value>
+  </data>
+  <data name="OfflineSyncVaultButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Jetzt synchronisieren</value>
+  </data>
+  <data name="OfflineRemoveVaultIconButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Aus dem Offlinespeicher entfernen</value>
+  </data>
+  <data name="OfflineNoVaultsText.Text" xml:space="preserve">
+    <value>Noch keine Tresore offline verfügbar. Klicken Sie im Baum mit der rechten Maustaste auf einen Tresor und wählen Sie "Offline verfügbar machen".</value>
+  </data>
+  <data name="OfflineSearchBox.PlaceholderText" xml:space="preserve">
+    <value>Nach Name, Tag, Inhaltstyp oder Tresor suchen</value>
+  </data>
+  <data name="OfflineTypeHeader.Text" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="OfflineTagsHeader.Text" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="OfflineUpdatedHeader.Text" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="OfflineCopyNameButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Namen kopieren</value>
+  </data>
+  <data name="OfflineCopyValueButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Gespeicherten Geheimniswert kopieren</value>
+  </data>
+  <data name="OfflineStoreMenuItem.Text" xml:space="preserve">
+    <value>Offlinespeicher</value>
+  </data>
+  <data name="MakeAvailableOfflineMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Offline verfügbar machen</value>
+  </data>
+  <data name="OfflineStoreTabHeader" xml:space="preserve">
+    <value>Offlinespeicher</value>
+  </data>
+  <data name="OfflineNeverSynced" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="OfflineResultsTruncated" xml:space="preserve">
+    <value>Erste {0} Treffer angezeigt</value>
+  </data>
+  <data name="OfflineResultsCount" xml:space="preserve">
+    <value>{0} Elemente</value>
+  </data>
+  <data name="OfflineRemoveVaultConfirmTitle" xml:space="preserve">
+    <value>Aus dem Offlinespeicher entfernen?</value>
+  </data>
+  <data name="OfflineRemoveVaultConfirmMessage" xml:space="preserve">
+    <value>Die Offlinekopie von '{0}' wird einschließlich gespeicherter Geheimniswerte von diesem Gerät gelöscht. Der Tresor in Azure ist davon nicht betroffen.</value>
+  </data>
+  <data name="OfflineRemoveVaultButton" xml:space="preserve">
+    <value>Entfernen</value>
+  </data>
+  <data name="OfflineSyncCompletedTitle" xml:space="preserve">
+    <value>Offlinesynchronisierung abgeschlossen</value>
+  </data>
+  <data name="OfflineSyncCompletedMessage" xml:space="preserve">
+    <value>Synchronisierte Tresore: {0}</value>
+  </data>
+  <data name="OfflineSyncWarningTitle" xml:space="preserve">
+    <value>Offlinesynchronisierung mit Problemen beendet</value>
+  </data>
+  <data name="OfflineVaultAddedMessage" xml:space="preserve">
+    <value>'{0}' wurde dem Offlinespeicher hinzugefügt. Wird synchronisiert…</value>
+  </data>
 </root>

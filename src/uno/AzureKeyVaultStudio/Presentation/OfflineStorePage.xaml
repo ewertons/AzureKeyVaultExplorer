@@ -1,0 +1,228 @@
+<Page
+    x:Class="AzureKeyVaultStudio.Presentation.OfflineStorePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:models="using:AzureKeyVaultStudio.Models"
+    xmlns:vm="using:AzureKeyVaultStudio.Presentation.ViewModels"
+    NavigationCacheMode="Enabled">
+
+    <Grid Margin="16,5" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Offline vaults  -->
+        <Grid Grid.Row="0" ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock x:Uid="OfflineStoreTitle" Style="{ThemeResource SubtitleTextBlockStyle}" />
+                <TextBlock
+                    x:Uid="OfflineStoreDescription"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Style="{ThemeResource CaptionTextBlockStyle}"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+            <Button
+                x:Uid="OfflineSyncAllButton"
+                Grid.Column="1"
+                VerticalAlignment="Top"
+                Command="{x:Bind ViewModel.SyncAllCommand}"
+                IsEnabled="{x:Bind ViewModel.HasVaults, Mode=OneWay}"
+                Style="{ThemeResource AccentButtonStyle}" />
+        </Grid>
+
+        <Border
+            Grid.Row="1"
+            MaxHeight="240"
+            Padding="12,8"
+            Background="{ThemeResource LayerOnAcrylicFillColorDefaultBrush}"
+            BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            CornerRadius="{ThemeResource CornerRadiusValue}">
+            <Grid>
+                <ListView
+                    ItemsSource="{x:Bind ViewModel.Vaults}"
+                    SelectionMode="None"
+                    Visibility="{x:Bind ViewModel.HasVaults, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <ListView.Header>
+                        <Grid Padding="12,0,12,4" ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="170" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock x:Uid="OfflineVaultHeader" FontWeight="SemiBold" />
+                            <TextBlock x:Uid="OfflineLastSyncedHeader" Grid.Column="1" FontWeight="SemiBold" />
+                            <TextBlock x:Uid="OfflineSecretValuesHeader" Grid.Column="2" FontWeight="SemiBold" />
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="vm:OfflineVaultRow">
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="170" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Spacing="6">
+                                    <TextBlock Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" />
+                                    <FontIcon
+                                        FontSize="12"
+                                        Foreground="{ThemeResource SystemFillColorCautionBrush}"
+                                        Glyph="&#xE7BA;"
+                                        ToolTipService.ToolTip="{x:Bind LastSyncError, Mode=OneWay}"
+                                        Visibility="{x:Bind HasError, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Grid.Column="1"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    Spacing="6">
+                                    <ProgressRing
+                                        Width="14"
+                                        Height="14"
+                                        IsActive="{x:Bind IsSyncing, Mode=OneWay}" />
+                                    <TextBlock Text="{x:Bind LastSyncedText, Mode=OneWay}" />
+                                </StackPanel>
+                                <ToggleSwitch
+                                    Grid.Column="2"
+                                    MinWidth="0"
+                                    VerticalAlignment="Center"
+                                    IsOn="{x:Bind IncludeSecretValues, Mode=TwoWay}" />
+                                <StackPanel
+                                    Grid.Column="3"
+                                    Orientation="Horizontal"
+                                    Spacing="4">
+                                    <Button
+                                        x:Uid="OfflineSyncVaultButton"
+                                        Click="SyncVault_Click"
+                                        IsEnabled="{x:Bind IsSyncing, Mode=OneWay, Converter={StaticResource BoolNegationConverter}}">
+                                        <FontIcon FontSize="14" Glyph="&#xE895;" />
+                                    </Button>
+                                    <Button x:Uid="OfflineRemoveVaultIconButton" Click="RemoveVault_Click">
+                                        <FontIcon FontSize="14" Glyph="&#xE74D;" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <TextBlock
+                    x:Uid="OfflineNoVaultsText"
+                    Margin="0,8"
+                    HorizontalAlignment="Center"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    TextWrapping="Wrap"
+                    Visibility="{x:Bind ViewModel.HasVaults, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}" />
+            </Grid>
+        </Border>
+
+        <!--  Search  -->
+        <AutoSuggestBox
+            x:Uid="OfflineSearchBox"
+            Grid.Row="2"
+            QueryIcon="Find"
+            Text="{x:Bind ViewModel.SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <Grid
+            Grid.Row="3"
+            Padding="12,0"
+            ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="90" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="140" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Uid="DeletedItemsNameHeader" FontWeight="SemiBold" />
+            <TextBlock x:Uid="OfflineTypeHeader" Grid.Column="1" FontWeight="SemiBold" />
+            <TextBlock x:Uid="OfflineVaultHeader" Grid.Column="2" FontWeight="SemiBold" />
+            <TextBlock x:Uid="OfflineTagsHeader" Grid.Column="3" FontWeight="SemiBold" />
+            <TextBlock x:Uid="OfflineUpdatedHeader" Grid.Column="4" FontWeight="SemiBold" />
+            <TextBlock
+                Grid.Column="5"
+                HorizontalAlignment="Right"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                Style="{ThemeResource CaptionTextBlockStyle}"
+                Text="{x:Bind ViewModel.ResultsSummary, Mode=OneWay}"
+                TextTrimming="CharacterEllipsis" />
+        </Grid>
+
+        <ListView
+            Grid.Row="4"
+            ItemsSource="{x:Bind ViewModel.Results, Mode=OneWay}"
+            SelectedItem="{x:Bind ViewModel.SelectedResult, Mode=TwoWay}"
+            SelectionMode="Single">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:OfflineItem">
+                    <Grid ColumnSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="90" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="80" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="{x:Bind Name}" TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                Style="{ThemeResource CaptionTextBlockStyle}"
+                                Text="{x:Bind ContentType}"
+                                TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                        <TextBlock
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Text="{x:Bind TypeText}" />
+                        <TextBlock
+                            Grid.Column="2"
+                            VerticalAlignment="Center"
+                            Text="{x:Bind VaultName}"
+                            TextTrimming="CharacterEllipsis" />
+                        <TextBlock
+                            Grid.Column="3"
+                            VerticalAlignment="Center"
+                            Text="{x:Bind TagsText}"
+                            TextTrimming="CharacterEllipsis"
+                            ToolTipService.ToolTip="{x:Bind TagsText}" />
+                        <TextBlock
+                            Grid.Column="4"
+                            VerticalAlignment="Center"
+                            Text="{x:Bind UpdatedOnText}" />
+                        <StackPanel
+                            Grid.Column="5"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Spacing="4">
+                            <Button x:Uid="OfflineCopyNameButton" Click="CopyName_Click">
+                                <FontIcon FontSize="14" Glyph="&#xE8C8;" />
+                            </Button>
+                            <Button
+                                x:Uid="OfflineCopyValueButton"
+                                Click="CopyValue_Click"
+                                IsEnabled="{x:Bind HasSecretValue}">
+                                <FontIcon FontSize="14" Glyph="&#xE8D7;" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
