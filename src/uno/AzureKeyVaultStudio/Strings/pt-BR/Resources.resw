@@ -1230,4 +1230,7 @@
   <data name="LoginPageOfflineBackButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Voltar</value>
   </data>
+  <data name="ExternalItemVaultUriInvalidMessage" xml:space="preserve">
+    <value>Informe uma URL do Key Vault, por exemplo https://contoso.vault.azure.net/.</value>
+  </data>
 </root>

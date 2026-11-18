@@ -166,4 +166,25 @@ public sealed class OfflineDatabaseTests : IDisposable
         Assert.Empty(await DbContext.GetPendingOperationsAsync());
         Assert.Empty(await DbContext.GetOfflineVaultsAsync());
     }
+
+    [Fact]
+    public async Task PendingOperations_Rebase_SetsTheExpectedState()
+    {
+        await AddVaultAsync();
+        var id = await DbContext.AddPendingOperationAsync(new PendingOperation
+        {
+            VaultUri = Vault, Kind = PendingOperationKind.SetSecret, ItemType = KeyVaultItemType.Secret, Name = "db", Value = "v",
+            ExpectedExists = false, ExpectedUpdatedOn = null, CreatedOn = T1,
+        });
+
+        await DbContext.RebasePendingOperationAsync(id, expectedExists: true, T1);
+        var op = Assert.Single(await DbContext.GetPendingOperationsAsync());
+        Assert.True(op.ExpectedExists);
+        Assert.Equal(T1, op.ExpectedUpdatedOn);
+
+        await DbContext.RebasePendingOperationAsync(id, expectedExists: false, null);
+        op = Assert.Single(await DbContext.GetPendingOperationsAsync());
+        Assert.False(op.ExpectedExists);
+        Assert.Null(op.ExpectedUpdatedOn);
+    }
 }

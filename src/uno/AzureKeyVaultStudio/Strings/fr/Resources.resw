@@ -1230,4 +1230,7 @@
   <data name="LoginPageOfflineBackButton.ToolTipService.ToolTip" xml:space="preserve">
     <value>Retour</value>
   </data>
+  <data name="ExternalItemVaultUriInvalidMessage" xml:space="preserve">
+    <value>Saisissez une URL Key Vault, par exemple https://contoso.vault.azure.net/.</value>
+  </data>
 </root>

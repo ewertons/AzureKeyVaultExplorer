@@ -73,6 +73,32 @@ public class PendingOperationPolicyTests
         Assert.Equal(PendingPushDecision.Conflict, PendingOperationPolicy.Evaluate(Op(PendingOperationKind.Delete, expectedUpdatedOn: T1), new RemoteItemState(T1.AddMinutes(1))));
     }
 
+    [Fact]
+    public void Delete_ExpectingItemGone_ConflictsWhenSomeoneCreatedIt()
+    {
+        // e.g. the queued create it followed was discarded
+        var delete = Op(PendingOperationKind.Delete, expectedExists: false);
+
+        Assert.Equal(PendingPushDecision.Conflict, PendingOperationPolicy.Evaluate(delete, new RemoteItemState(T1)));
+        Assert.Equal(PendingPushDecision.AlreadyApplied, PendingOperationPolicy.Evaluate(delete, null));
+    }
+
+    [Fact]
+    public void NextForSameItem_FindsTheFollowingChangeForThatItemOnly()
+    {
+        var ops = new[]
+        {
+            Op(PendingOperationKind.SetSecret, id: 1, name: "a"),
+            Op(PendingOperationKind.SetSecret, id: 2, name: "b"),
+            Op(PendingOperationKind.Delete, id: 4, name: "A"),
+            Op(PendingOperationKind.SetSecret, id: 5, name: "a"),
+        };
+
+        Assert.Equal(4L, PendingOperationPolicy.NextForSameItem(ops, ops[0])?.Id);
+        Assert.Null(PendingOperationPolicy.NextForSameItem(ops, ops[1]));
+        Assert.Null(PendingOperationPolicy.NextForSameItem(ops, ops[3]));
+    }
+
     [Theory]
     [InlineData(PendingOperationKind.SetSecret)]
     [InlineData(PendingOperationKind.Delete)]
