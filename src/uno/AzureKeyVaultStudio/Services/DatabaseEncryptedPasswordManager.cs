@@ -44,12 +44,25 @@ public static class DatabaseEncryptedPasswordManager
             return password;
         }
 
-        // if linux then use an empty string as the password
+        if (OperatingSystem.IsLinux())
+            return LinuxDatabasePasswordStore.Read();
+
         return "";
     }
 
+    /// <summary>
+    /// Generates a 256-bit random password, hex-encoded so it is safe inside connection strings and SQL literals.
+    /// </summary>
+    public static string GeneratePassword() => Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
+
     public static void SetSecret(string secret)
     {
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxDatabasePasswordStore.Write(secret);
+            return;
+        }
+
         if (OperatingSystem.IsMacOS())
         {
             // HACK: is to have a file there rather than checking the keychain on mac.
@@ -142,6 +155,10 @@ public static class DatabaseEncryptedPasswordManager
                 File.Delete(macosPath);
             }
             MacOSKeyChainService.DeleteFromKeychain(Constants.KeychainSecretName, Constants.KeychainServiceName);
+        }
+        if (OperatingSystem.IsLinux())
+        {
+            LinuxDatabasePasswordStore.Clear();
         }
         if (OperatingSystem.IsWindows())
         {

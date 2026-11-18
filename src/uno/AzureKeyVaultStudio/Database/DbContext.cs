@@ -7,6 +7,7 @@ namespace AzureKeyVaultStudio.Database;
 public partial class DbContext : IDisposable
 {
     private static string? _password = null;
+    private static readonly SemaphoreSlim _passwordLock = new(1, 1);
 
     public DbContext()
     {
@@ -174,11 +175,29 @@ public partial class DbContext : IDisposable
     {
         if (_password == null)
         {
-            var dbPassExists = File.Exists(Constants.DatabasePasswordFilePath);
-            if (!dbPassExists)
-                DatabaseEncryptedPasswordManager.SetSecret($"keyvaultexplorer_{System.Guid.NewGuid().ToString()[..6]}");
+            await _passwordLock.WaitAsync();
+            try
+            {
+                if (_password == null)
+                {
+                    if (OperatingSystem.IsLinux())
+                    {
+                        _password = await InitializeLinuxDatabasePasswordAsync();
+                    }
+                    else
+                    {
+                        var dbPassExists = File.Exists(Constants.DatabasePasswordFilePath);
+                        if (!dbPassExists)
+                            DatabaseEncryptedPasswordManager.SetSecret(DatabaseEncryptedPasswordManager.GeneratePassword());
 
-            _password = await DatabaseEncryptedPasswordManager.GetSecret();
+                        _password = await DatabaseEncryptedPasswordManager.GetSecret();
+                    }
+                }
+            }
+            finally
+            {
+                _passwordLock.Release();
+            }
         }
 
         var db = new SqliteConnection($"Filename={Constants.DatabaseFilePath}; Password={_password}");
@@ -252,8 +271,11 @@ public partial class DbContext : IDisposable
         {
             using var connection = await TryCreateDatabaseAndOpenConnection();
             await connection.CloseAsync();
+            SqliteConnection.ClearAllPools();
             File.Delete(Constants.DatabaseFilePath);
             DatabaseEncryptedPasswordManager.PurgePasswords();
+            // The stored password was purged; don't keep using the stale one for a recreated database.
+            _password = null;
         }
     }
 }
