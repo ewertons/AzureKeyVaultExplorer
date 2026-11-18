@@ -90,3 +90,12 @@ public class AuthenticationRequiredException : Exception
     public AuthenticationRequiredException(string message) : base(message) { }
     public AuthenticationRequiredException(string message, Exception innerException) : base(message, innerException) { }
 }
+
+/// <summary>
+/// Raised when Key Vault returns 409, e.g. the item name is held by a soft-deleted item or an operation is in progress.
+/// </summary>
+public class KeyVaultItemConflictException : Exception
+{
+    public KeyVaultItemConflictException(string message) : base(message) { }
+    public KeyVaultItemConflictException(string message, Exception innerException) : base(message, innerException) { }
+}

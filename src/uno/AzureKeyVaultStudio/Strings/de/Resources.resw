@@ -723,4 +723,73 @@
   <data name="ExpiredTextBlock.Text" xml:space="preserve">
     <value>Abgelaufen</value>
   </data>
+  <data name="VaultPageDeleteButton.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="ShowDeletedItemsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Gelöschte Elemente (wiederherstellen oder endgültig löschen)</value>
+  </data>
+  <data name="DeleteItemConfirmTitle" xml:space="preserve">
+    <value>Element löschen?</value>
+  </data>
+  <data name="DeleteItemConfirmMessage" xml:space="preserve">
+    <value>'{0}' löschen? Das Element wird vorläufig gelöscht und kann bis zum Ende der Aufbewahrungsdauer unter 'Gelöschte Elemente' wiederhergestellt werden.</value>
+  </data>
+  <data name="DeleteButtonText" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="ItemDeletedMessage" xml:space="preserve">
+    <value>'{0}' wurde gelöscht.</value>
+  </data>
+  <data name="DeletePermissionHint" xml:space="preserve">
+    <value>Zum Löschen ist die Berechtigung 'delete' (oder eine Key Vault Officer-/Administrator-Rolle) erforderlich.</value>
+  </data>
+  <data name="DeletedItemsWindowTitle" xml:space="preserve">
+    <value>Gelöschte Elemente</value>
+  </data>
+  <data name="DeletedItemsTitle.Text" xml:space="preserve">
+    <value>Gelöschte Elemente</value>
+  </data>
+  <data name="DeletedItemsEmpty" xml:space="preserve">
+    <value>Keine gelöschten Elemente.</value>
+  </data>
+  <data name="DeletedItemsTypeHeader.Text" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="DeletedItemsNameHeader.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DeletedItemsDeletedHeader.Text" xml:space="preserve">
+    <value>Gelöscht</value>
+  </data>
+  <data name="DeletedItemsPurgeHeader.Text" xml:space="preserve">
+    <value>Geplante Bereinigung</value>
+  </data>
+  <data name="ItemTypeAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="RecoverButton.Content" xml:space="preserve">
+    <value>Wiederherstellen</value>
+  </data>
+  <data name="PurgeButton.Content" xml:space="preserve">
+    <value>Endgültig löschen</value>
+  </data>
+  <data name="PurgeButtonText" xml:space="preserve">
+    <value>Endgültig löschen</value>
+  </data>
+  <data name="PurgeItemConfirmTitle" xml:space="preserve">
+    <value>Element endgültig löschen?</value>
+  </data>
+  <data name="PurgeItemConfirmMessage" xml:space="preserve">
+    <value>'{0}' endgültig löschen? Dies kann nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="ItemRecoveredMessage" xml:space="preserve">
+    <value>'{0}' wurde wiederhergestellt.</value>
+  </data>
+  <data name="ItemPurgedMessage" xml:space="preserve">
+    <value>'{0}' wurde endgültig gelöscht.</value>
+  </data>
+  <data name="PurgePermissionHint" xml:space="preserve">
+    <value>Endgültiges Löschen erfordert die Berechtigung 'purge' (oder die Rolle Key Vault Purge Operator / Administrator) und ist bei aktiviertem Löschschutz blockiert.</value>
+  </data>
 </root>

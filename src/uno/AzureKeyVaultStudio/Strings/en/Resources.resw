@@ -723,4 +723,73 @@
   <data name="ExpiredTextBlock.Text" xml:space="preserve">
     <value>Expired</value>
   </data>
+  <data name="VaultPageDeleteButton.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ShowDeletedItemsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Deleted items (recover or purge)</value>
+  </data>
+  <data name="DeleteItemConfirmTitle" xml:space="preserve">
+    <value>Delete item?</value>
+  </data>
+  <data name="DeleteItemConfirmMessage" xml:space="preserve">
+    <value>Delete '{0}'? It will be soft-deleted and can be recovered from 'Deleted items' until its retention period ends.</value>
+  </data>
+  <data name="DeleteButtonText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ItemDeletedMessage" xml:space="preserve">
+    <value>'{0}' was deleted.</value>
+  </data>
+  <data name="DeletePermissionHint" xml:space="preserve">
+    <value>Deleting requires the 'delete' permission (or a Key Vault Officer / Administrator role).</value>
+  </data>
+  <data name="DeletedItemsWindowTitle" xml:space="preserve">
+    <value>Deleted items</value>
+  </data>
+  <data name="DeletedItemsTitle.Text" xml:space="preserve">
+    <value>Deleted items</value>
+  </data>
+  <data name="DeletedItemsEmpty" xml:space="preserve">
+    <value>No deleted items.</value>
+  </data>
+  <data name="DeletedItemsTypeHeader.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="DeletedItemsNameHeader.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="DeletedItemsDeletedHeader.Text" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="DeletedItemsPurgeHeader.Text" xml:space="preserve">
+    <value>Scheduled purge</value>
+  </data>
+  <data name="ItemTypeAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="RecoverButton.Content" xml:space="preserve">
+    <value>Recover</value>
+  </data>
+  <data name="PurgeButton.Content" xml:space="preserve">
+    <value>Purge</value>
+  </data>
+  <data name="PurgeButtonText" xml:space="preserve">
+    <value>Purge</value>
+  </data>
+  <data name="PurgeItemConfirmTitle" xml:space="preserve">
+    <value>Permanently purge item?</value>
+  </data>
+  <data name="PurgeItemConfirmMessage" xml:space="preserve">
+    <value>Permanently purge '{0}'? This cannot be undone.</value>
+  </data>
+  <data name="ItemRecoveredMessage" xml:space="preserve">
+    <value>'{0}' was recovered.</value>
+  </data>
+  <data name="ItemPurgedMessage" xml:space="preserve">
+    <value>'{0}' was purged.</value>
+  </data>
+  <data name="PurgePermissionHint" xml:space="preserve">
+    <value>Purging requires the 'purge' permission (or the Key Vault Purge Operator / Administrator role) and is blocked when purge protection is enabled.</value>
+  </data>
 </root>

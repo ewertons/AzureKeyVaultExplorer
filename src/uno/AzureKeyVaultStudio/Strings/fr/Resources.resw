@@ -723,4 +723,73 @@
   <data name="ExpiredTextBlock.Text" xml:space="preserve">
     <value>Expiré</value>
   </data>
+  <data name="VaultPageDeleteButton.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ShowDeletedItemsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Éléments supprimés (récupérer ou purger)</value>
+  </data>
+  <data name="DeleteItemConfirmTitle" xml:space="preserve">
+    <value>Supprimer l'élément ?</value>
+  </data>
+  <data name="DeleteItemConfirmMessage" xml:space="preserve">
+    <value>Supprimer '{0}' ? L'élément sera supprimé de façon réversible et pourra être récupéré depuis 'Éléments supprimés' jusqu'à la fin de sa période de rétention.</value>
+  </data>
+  <data name="DeleteButtonText" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="ItemDeletedMessage" xml:space="preserve">
+    <value>'{0}' a été supprimé.</value>
+  </data>
+  <data name="DeletePermissionHint" xml:space="preserve">
+    <value>La suppression nécessite l'autorisation 'delete' (ou un rôle Key Vault Officer / Administrator).</value>
+  </data>
+  <data name="DeletedItemsWindowTitle" xml:space="preserve">
+    <value>Éléments supprimés</value>
+  </data>
+  <data name="DeletedItemsTitle.Text" xml:space="preserve">
+    <value>Éléments supprimés</value>
+  </data>
+  <data name="DeletedItemsEmpty" xml:space="preserve">
+    <value>Aucun élément supprimé.</value>
+  </data>
+  <data name="DeletedItemsTypeHeader.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="DeletedItemsNameHeader.Text" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="DeletedItemsDeletedHeader.Text" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="DeletedItemsPurgeHeader.Text" xml:space="preserve">
+    <value>Purge planifiée</value>
+  </data>
+  <data name="ItemTypeAll" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="RecoverButton.Content" xml:space="preserve">
+    <value>Récupérer</value>
+  </data>
+  <data name="PurgeButton.Content" xml:space="preserve">
+    <value>Purger</value>
+  </data>
+  <data name="PurgeButtonText" xml:space="preserve">
+    <value>Purger</value>
+  </data>
+  <data name="PurgeItemConfirmTitle" xml:space="preserve">
+    <value>Purger définitivement l'élément ?</value>
+  </data>
+  <data name="PurgeItemConfirmMessage" xml:space="preserve">
+    <value>Purger définitivement '{0}' ? Cette action est irréversible.</value>
+  </data>
+  <data name="ItemRecoveredMessage" xml:space="preserve">
+    <value>'{0}' a été récupéré.</value>
+  </data>
+  <data name="ItemPurgedMessage" xml:space="preserve">
+    <value>'{0}' a été purgé.</value>
+  </data>
+  <data name="PurgePermissionHint" xml:space="preserve">
+    <value>La purge nécessite l'autorisation 'purge' (ou le rôle Key Vault Purge Operator / Administrator) et est bloquée lorsque la protection contre le vidage est activée.</value>
+  </data>
 </root>

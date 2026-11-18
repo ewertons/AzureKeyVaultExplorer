@@ -44,6 +44,31 @@ public sealed class KeyVaultItemProperties
 
     public bool IsExpired => ExpiresOn.HasValue && (ExpiresOn.Value < DateTimeOffset.Now);
 
+    public bool IsDeleted { get; set; }
+    public Uri? RecoveryId { get; set; }
+    public DateTimeOffset? DeletedOn { get; set; }
+    public DateTimeOffset? ScheduledPurgeDate { get; set; }
+    public string? WhenDeleted => DeletedOn.HasValue ? DeletedOn.Value.ToLocalTime().Humanize() : null;
+    public string? WhenPurged => ScheduledPurgeDate.HasValue ? ScheduledPurgeDate.Value.ToLocalTime().Humanize() : null;
+
+    public static KeyVaultItemProperties FromDeletedSecret(DeletedSecret deleted)
+        => MarkDeleted(FromSecretProperties(deleted.Properties), deleted.RecoveryId, deleted.DeletedOn, deleted.ScheduledPurgeDate);
+
+    public static KeyVaultItemProperties FromDeletedKey(DeletedKey deleted)
+        => MarkDeleted(FromKeyProperties(deleted.Properties), deleted.RecoveryId, deleted.DeletedOn, deleted.ScheduledPurgeDate);
+
+    public static KeyVaultItemProperties FromDeletedCertificate(DeletedCertificate deleted)
+        => MarkDeleted(FromCertificateProperties(deleted.Properties), deleted.RecoveryId, deleted.DeletedOn, deleted.ScheduledPurgeDate);
+
+    private static KeyVaultItemProperties MarkDeleted(KeyVaultItemProperties item, Uri? recoveryId, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeDate)
+    {
+        item.IsDeleted = true;
+        item.RecoveryId = recoveryId;
+        item.DeletedOn = deletedOn;
+        item.ScheduledPurgeDate = scheduledPurgeDate;
+        return item;
+    }
+
     public static KeyVaultItemProperties FromSecretProperties(SecretProperties properties)
       => Create(
           properties.Id,

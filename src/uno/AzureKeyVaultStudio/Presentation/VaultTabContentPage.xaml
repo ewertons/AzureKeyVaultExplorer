@@ -31,6 +31,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <toolkit:Segmented
@@ -80,7 +81,17 @@
                 </TextBox>
 
                 <Button
+                    x:Uid="ShowDeletedItemsButton"
                     Grid.Column="3"
+                    MinHeight="30"
+                    MaxHeight="30"
+                    HorizontalAlignment="Center"
+                    Command="{x:Bind ViewModel.ShowDeletedItemsCommand, Mode=OneWay}">
+                    <FontIcon FontSize="14" Glyph="&#xE74D;" />
+                </Button>
+
+                <Button
+                    Grid.Column="4"
                     MinHeight="30"
                     MaxHeight="30"
                     HorizontalAlignment="Center"
@@ -210,6 +221,13 @@
                                     Command="{x:Bind ViewModel.CopyUriCommand, Mode=OneWay}"
                                     CommandParameter="{x:Bind ViewModel.SelectedRow, Mode=OneWay}"
                                     Icon="Link" />
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem
+                                    x:Name="VaultPageDeleteButton"
+                                    x:Uid="VaultPageDeleteButton"
+                                    Command="{x:Bind ViewModel.DeleteItemCommand, Mode=OneWay}"
+                                    CommandParameter="{x:Bind ViewModel.SelectedRow, Mode=OneWay}"
+                                    Icon="Delete" />
                             </MenuFlyout>
                         </controls:DataGrid.ContextFlyout>
                         <controls:DataGrid.RowStyle>

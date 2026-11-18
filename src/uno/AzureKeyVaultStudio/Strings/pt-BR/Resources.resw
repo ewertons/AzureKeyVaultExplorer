@@ -723,4 +723,73 @@
   <data name="ExpiredTextBlock.Text" xml:space="preserve">
     <value>Expirado</value>
   </data>
+  <data name="VaultPageDeleteButton.Text" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="ShowDeletedItemsButton.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Itens excluídos (recuperar ou limpar)</value>
+  </data>
+  <data name="DeleteItemConfirmTitle" xml:space="preserve">
+    <value>Excluir item?</value>
+  </data>
+  <data name="DeleteItemConfirmMessage" xml:space="preserve">
+    <value>Excluir '{0}'? Ele será excluído temporariamente e poderá ser recuperado em 'Itens excluídos' até o fim do período de retenção.</value>
+  </data>
+  <data name="DeleteButtonText" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="ItemDeletedMessage" xml:space="preserve">
+    <value>'{0}' foi excluído.</value>
+  </data>
+  <data name="DeletePermissionHint" xml:space="preserve">
+    <value>A exclusão requer a permissão 'delete' (ou uma função Key Vault Officer / Administrator).</value>
+  </data>
+  <data name="DeletedItemsWindowTitle" xml:space="preserve">
+    <value>Itens excluídos</value>
+  </data>
+  <data name="DeletedItemsTitle.Text" xml:space="preserve">
+    <value>Itens excluídos</value>
+  </data>
+  <data name="DeletedItemsEmpty" xml:space="preserve">
+    <value>Nenhum item excluído.</value>
+  </data>
+  <data name="DeletedItemsTypeHeader.Text" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="DeletedItemsNameHeader.Text" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="DeletedItemsDeletedHeader.Text" xml:space="preserve">
+    <value>Excluído</value>
+  </data>
+  <data name="DeletedItemsPurgeHeader.Text" xml:space="preserve">
+    <value>Limpeza agendada</value>
+  </data>
+  <data name="ItemTypeAll" xml:space="preserve">
+    <value>Todos</value>
+  </data>
+  <data name="RecoverButton.Content" xml:space="preserve">
+    <value>Recuperar</value>
+  </data>
+  <data name="PurgeButton.Content" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+  <data name="PurgeButtonText" xml:space="preserve">
+    <value>Limpar</value>
+  </data>
+  <data name="PurgeItemConfirmTitle" xml:space="preserve">
+    <value>Limpar o item permanentemente?</value>
+  </data>
+  <data name="PurgeItemConfirmMessage" xml:space="preserve">
+    <value>Limpar '{0}' permanentemente? Esta ação não pode ser desfeita.</value>
+  </data>
+  <data name="ItemRecoveredMessage" xml:space="preserve">
+    <value>'{0}' foi recuperado.</value>
+  </data>
+  <data name="ItemPurgedMessage" xml:space="preserve">
+    <value>'{0}' foi limpo.</value>
+  </data>
+  <data name="PurgePermissionHint" xml:space="preserve">
+    <value>A limpeza requer a permissão 'purge' (ou a função Key Vault Purge Operator / Administrator) e é bloqueada quando a proteção contra limpeza está habilitada.</value>
+  </data>
 </root>
