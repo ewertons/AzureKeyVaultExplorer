@@ -39,12 +39,15 @@ public static class OfflineSyncPlanner
                 continue;
 
             localByKey.TryGetValue((item.Type, item.Name), out var existing);
-            var versionChanged = existing is null || existing.Version != item.Version;
 
-            if (versionChanged || existing!.UpdatedOn != item.UpdatedOn)
+            // List APIs return ids without a version, so UpdatedOn (which changes with every new version
+            // and attribute update) is the reliable change marker; Version is compared when available.
+            var changed = existing is null || existing.Version != item.Version || existing.UpdatedOn != item.UpdatedOn;
+
+            if (changed)
                 upserts.Add(item);
 
-            if (includeSecretValues && CanStoreValue(item) && (versionChanged || !existing!.HasSecretValue))
+            if (includeSecretValues && CanStoreValue(item) && (changed || !existing!.HasSecretValue))
                 valuesToFetch.Add(item);
         }
 

@@ -211,15 +211,16 @@ public partial class DbContext
         await using (var upsert = connection.CreateCommand())
         {
             upsert.Transaction = transaction;
-            // A new version invalidates any stored value; it's re-set below if it was fetched.
+            // Any change may mean a new version, which invalidates the stored value; it's re-set below if it was fetched.
             upsert.CommandText = """
                 INSERT INTO OfflineItems (VaultUri, Type, Name, ItemId, Version, ContentType, Enabled, CreatedOn, UpdatedOn, ExpiresOn, Tags)
                 VALUES (@VaultUri, @Type, @Name, @ItemId, @Version, @ContentType, @Enabled, @CreatedOn, @UpdatedOn, @ExpiresOn, @Tags)
                 ON CONFLICT (VaultUri, Type, Name) DO UPDATE SET
                     Name = excluded.Name, ItemId = excluded.ItemId, ContentType = excluded.ContentType, Enabled = excluded.Enabled,
-                    CreatedOn = excluded.CreatedOn, UpdatedOn = excluded.UpdatedOn, ExpiresOn = excluded.ExpiresOn, Tags = excluded.Tags,
-                    SecretValue = CASE WHEN OfflineItems.Version IS excluded.Version THEN OfflineItems.SecretValue ELSE NULL END,
-                    Version = excluded.Version;
+                    CreatedOn = excluded.CreatedOn, ExpiresOn = excluded.ExpiresOn, Tags = excluded.Tags,
+                    SecretValue = CASE WHEN OfflineItems.Version IS excluded.Version AND OfflineItems.UpdatedOn IS excluded.UpdatedOn
+                                       THEN OfflineItems.SecretValue ELSE NULL END,
+                    Version = excluded.Version, UpdatedOn = excluded.UpdatedOn;
                 """;
             var p = upsert.Parameters;
             p.AddWithValue("@VaultUri", vaultUri);
