@@ -14,7 +14,10 @@ public static class PendingOperationPolicy
         {
             if (remote is null)
                 return PendingPushDecision.AlreadyApplied;
-            return operation.Force || Unchanged(operation, remote) ? PendingPushDecision.Apply : PendingPushDecision.Conflict;
+            if (operation.Force)
+                return PendingPushDecision.Apply;
+            // Expected to be gone (an earlier queued change that created it was discarded): someone else created it since.
+            return operation.ExpectedExists && Unchanged(operation, remote) ? PendingPushDecision.Apply : PendingPushDecision.Conflict;
         }
 
         if (operation.Force)
@@ -55,6 +58,16 @@ public static class PendingOperationPolicy
 
         return runnable;
     }
+
+    /// <summary>
+    /// Returns the change queued right after <paramref name="operation"/> for the same item, if any. A change queued
+    /// behind another one is based on that change's outcome, so it must be rebased once that change is pushed or discarded.
+    /// </summary>
+    public static PendingOperation? NextForSameItem(IEnumerable<PendingOperation> operations, PendingOperation operation) =>
+        operations
+            .Where(o => o.Id > operation.Id && ItemKeyComparer.Instance.Equals((o.ItemType, o.Name), (operation.ItemType, operation.Name)))
+            .OrderBy(o => o.Id)
+            .FirstOrDefault();
 
     /// <summary>Exponential back-off: 30s, 1m, 2m, … capped at 30 minutes.</summary>
     public static TimeSpan RetryDelay(int attempts)

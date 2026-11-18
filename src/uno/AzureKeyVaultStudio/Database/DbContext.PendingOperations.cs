@@ -99,6 +99,18 @@ public partial class DbContext
         await command.ExecuteNonQueryAsync();
     }
 
+    /// <summary>Changes the state a queued change expects to find in Key Vault before it is pushed.</summary>
+    public static async Task RebasePendingOperationAsync(long id, bool expectedExists, DateTimeOffset? expectedUpdatedOn)
+    {
+        await using var connection = await OpenOfflineConnectionAsync();
+        await using var command = connection.CreateCommand();
+        command.CommandText = "UPDATE PendingOperations SET ExpectedExists = @ExpectedExists, ExpectedUpdatedOn = @ExpectedUpdatedOn WHERE Id = @Id;";
+        command.Parameters.AddWithValue("@Id", id);
+        command.Parameters.AddWithValue("@ExpectedExists", expectedExists ? 1 : 0);
+        command.Parameters.AddWithValue("@ExpectedUpdatedOn", (object?)FormatDate(expectedUpdatedOn) ?? DBNull.Value);
+        await command.ExecuteNonQueryAsync();
+    }
+
     /// <summary>Replaces the value of a queued, not yet pushed, secret change.</summary>
     public static async Task UpdatePendingSetSecretAsync(long id, string value, string? contentType)
     {
