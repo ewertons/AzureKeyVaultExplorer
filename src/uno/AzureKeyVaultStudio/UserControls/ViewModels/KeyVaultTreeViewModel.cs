@@ -223,6 +223,14 @@ public partial class KeyVaultTreeViewModel : ObservableObject
             catch (Exception ex)
             {
                 Debug.WriteLine($"Error in InitializeTreeDataSource: {ex}");
+                // Without this the tree is silently left empty (e.g. on missing consent or an access error).
+                _dispatcher?.TryEnqueue(() => WeakReferenceMessenger.Default.Send(new SendInAppNotificationMessage(new CommunityToolkit.WinUI.Behaviors.Notification
+                {
+                    Severity = InfoBarSeverity.Error,
+                    Title = "Could not load subscriptions",
+                    Message = $"{ex.GetType().Name}: {ex.Message}",
+                    Duration = TimeSpan.FromSeconds(30),
+                })));
             }
 
             if (_dispatcher != null)
