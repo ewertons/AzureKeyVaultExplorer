@@ -30,6 +30,8 @@ public static class Constants
 
     public static readonly string[] KvScope = ["https://vault.azure.net/.default"];
 
+    public static readonly string[] ConsentScopes = ["https://management.core.windows.net//user_impersonation", "https://vault.azure.net/user_impersonation"];
+
     public static readonly string[] AzureScopes = ["https://management.core.windows.net//.default", "https://vault.azure.net//.default", "user_impersonation"];
 
     // Cache settings
