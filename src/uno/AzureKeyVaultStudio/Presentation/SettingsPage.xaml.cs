@@ -7,6 +7,8 @@ public sealed partial class SettingsPage : Page
     public SettingsPage()
     {
         this.InitializeComponent();
+        Loaded += (_, _) => { if (ViewModel is { } vm) vm.IsActive = true; };
+        Unloaded += (_, _) => { if (ViewModel is { } vm) vm.IsActive = false; };
     }
 
 }

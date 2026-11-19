@@ -11,6 +11,8 @@ public sealed partial class LoginPage : Page
     public LoginPage()
     {
         this.InitializeComponent();
+        Loaded += (_, _) => { if (ViewModel is { } vm) vm.IsActive = true; };
+        Unloaded += (_, _) => { if (ViewModel is { } vm) vm.IsActive = false; };
     }
 
     // Lets users search their offline copy when they can't sign in (e.g. no network).

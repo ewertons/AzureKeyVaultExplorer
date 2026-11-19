@@ -104,14 +104,22 @@ public partial class SettingsViewModel : ObservableRecipient
             ?? AvailableLanguages.FirstOrDefault()
             ?? current;
 
+        IsActive = true;
+    }
+
+    // SettingsPage toggles IsActive on Loaded/Unloaded so a page that has been navigated away from
+    // (and whose controls are disposed) never receives these messages.
+    protected override void OnActivated()
+    {
+        base.OnActivated();
         WeakReferenceMessenger.Default.Register<SettingsViewModel, AuthenticationStateChangedMessage>(this, (r, m) =>
         {
             r.Claims = m.Value;
         });
         WeakReferenceMessenger.Default.Register<SettingsViewModel, AuthenticationRemovedStateChangedMessage>(this, (r, m) =>
         {
-            Claims = new();
-            IsAuthenticated = false;
+            r.Claims = new();
+            r.IsAuthenticated = false;
         });
     }
 
@@ -202,7 +210,8 @@ public partial class SettingsViewModel : ObservableRecipient
     [RelayCommand]
     private async Task SignOut()
     {
-        await _authentication.LogoutAsync();
+        // Clear MSAL first: LogoutAsync raises LoggedOut, and ShellViewModel then navigates to the login page,
+        // tearing this page down.
         await _authService.SignOutAsync();
         WeakReferenceMessenger.Default.Send(new SendInAppNotificationMessage(new Notification
         {
@@ -211,7 +220,7 @@ public partial class SettingsViewModel : ObservableRecipient
             Title = "Info",
             Duration = TimeSpan.FromSeconds(5),
         }));
-        await _navigator.NavigateViewModelAsync<LoginViewModel>(this, qualifier: Qualifiers.ClearBackStack);
+        await _authentication.LogoutAsync();
     }
 
     [RelayCommand]
@@ -230,8 +239,8 @@ public partial class SettingsViewModel : ObservableRecipient
     private async Task ResetApplicationState()
     {
         await DbContext.DeleteDatabaseFile();
-        await _authentication.LogoutAsync();
         await _authService.SignOutAsync();
+        await _authentication.LogoutAsync();
 
 #if WINDOWS
         Microsoft.Windows.AppLifecycle.AppInstance.Restart("");

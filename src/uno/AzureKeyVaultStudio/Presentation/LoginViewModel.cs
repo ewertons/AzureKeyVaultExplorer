@@ -7,7 +7,7 @@ using CommunityToolkit.Mvvm.Messaging;
 namespace AzureKeyVaultStudio.Presentation;
 
 [Microsoft.UI.Xaml.Data.Bindable]
-public partial class LoginViewModel : ObservableObject
+public partial class LoginViewModel : ObservableRecipient
 {
     private IAuthenticationService _authentication;
 
@@ -26,15 +26,29 @@ public partial class LoginViewModel : ObservableObject
         _dispatcher = dispatcher;
         _navigator = navigator;
         _authentication = authentication;
+        IsActive = true;
+    }
+
+    // LoginPage toggles IsActive on Loaded/Unloaded so a page that has been navigated away from
+    // (and whose controls are disposed) never receives these messages.
+    protected override void OnActivated()
+    {
+        base.OnActivated();
         WeakReferenceMessenger.Default.Register<LoginViewModel, AuthenticationStateChangedMessage>(this, (r, m) =>
         {
             r.Claims = m.Value;
         });
         WeakReferenceMessenger.Default.Register<LoginViewModel, AuthenticationRemovedStateChangedMessage>(this, (r, m) =>
         {
-            Claims = new();
-            IsAuthenticated = false;
+            r.Claims = new();
+            r.IsAuthenticated = false;
         });
+    }
+
+    protected override void OnDeactivated()
+    {
+        WeakReferenceMessenger.Default.UnregisterAll(this);
+        base.OnDeactivated();
     }
 
     [RelayCommand]
