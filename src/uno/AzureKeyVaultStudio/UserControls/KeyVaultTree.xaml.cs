@@ -13,6 +13,8 @@ public sealed partial class KeyVaultTree : UserControl
 {
     public DispatcherQueueTimer _debounceTimerSearch = DispatcherQueue.GetForCurrentThread().CreateTimer();
     private readonly MenuFlyout keyVaultMenuFlyout;
+    private readonly MenuFlyout subscriptionMenuFlyout;
+    private readonly MenuFlyout resourceGroupMenuFlyout;
 
     public KeyVaultTreeViewModel? ViewModel => DataContext as KeyVaultTreeViewModel;
 
@@ -21,6 +23,9 @@ public sealed partial class KeyVaultTree : UserControl
         InitializeComponent();
         DataContextChanged += OnDataContextChanged;
         keyVaultMenuFlyout = Resources["TreeViewContextFlyout"] as MenuFlyout;
+        // Realize every flyout with x:Bind items up front; otherwise Bindings.Update() hits null targets and aborts.
+        subscriptionMenuFlyout = Resources["SubscriptionContextFlyout"] as MenuFlyout;
+        resourceGroupMenuFlyout = Resources["ResourceGroupContextFlyout"] as MenuFlyout;
 #if HAS_UNO
         var flyout = Resources["TreeViewContextFlyout"] as MenuFlyout;
         flyout.DataContext = null;
@@ -137,8 +142,8 @@ public sealed partial class KeyVaultTree : UserControl
         var flyout = node switch
         {
             KvKeyVaultResourceModel { IsPlaceholder: false } => keyVaultMenuFlyout,
-            KvSubscriptionModel { Type: KvSubscriptionModel.ExplorerItemType.ResourceGroup } => Resources["SubscriptionContextFlyout"] as MenuFlyout,
-            KvResourceGroupModel { ResourceGroupResource: not null } => Resources["ResourceGroupContextFlyout"] as MenuFlyout,
+            KvSubscriptionModel { Type: KvSubscriptionModel.ExplorerItemType.            ResourceGroup } => subscriptionMenuFlyout,
+                        KvResourceGroupModel { ResourceGroupResource: not null } => resourceGroupMenuFlyout,
             _ => null,
         };
         if (flyout is null)
