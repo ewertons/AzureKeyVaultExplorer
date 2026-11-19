@@ -30,7 +30,11 @@ public static class Constants
 
     public static readonly string[] KvScope = ["https://vault.azure.net/.default"];
 
-    public static readonly string[] ConsentScopes = ["https://management.core.windows.net//user_impersonation", "https://vault.azure.net/user_impersonation"];
+    // Interactive sign-in redeems its authorization code for exactly one resource (ARM); Key Vault is consented to in the
+    // same prompt. OIDC scopes (openid, profile, offline_access) are added by MSAL automatically.
+    public static readonly string[] InteractiveLoginScopes = ["https://management.core.windows.net//user_impersonation"];
+
+    public static readonly string[] InteractiveLoginExtraConsentScopes = ["https://vault.azure.net/user_impersonation"];
 
     public static readonly string[] AzureScopes = ["https://management.core.windows.net//.default", "https://vault.azure.net//.default", "user_impersonation"];
 
