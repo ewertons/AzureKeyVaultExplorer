@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using AzureKeyVaultStudio.Messages;
 using AzureKeyVaultStudio.Services;
 using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.WinUI.Behaviors;
 
 namespace AzureKeyVaultStudio.Presentation;
 
@@ -10,6 +11,8 @@ namespace AzureKeyVaultStudio.Presentation;
 public partial class LoginViewModel : ObservableRecipient
 {
     private IAuthenticationService _authentication;
+
+    private readonly AuthService _authService;
 
     private INavigator _navigator;
 
@@ -26,6 +29,7 @@ public partial class LoginViewModel : ObservableRecipient
         _dispatcher = dispatcher;
         _navigator = navigator;
         _authentication = authentication;
+        _authService = authService;
         IsActive = true;
     }
 
@@ -78,6 +82,16 @@ public partial class LoginViewModel : ObservableRecipient
             if (success)
             {
                 await _navigator.NavigateViewModelAsync<MainViewModel>(this, qualifier: Qualifiers.ClearBackStack, cancellation: token);
+            }
+            else if (_authService.LastLoginError is { } error)
+            {
+                WeakReferenceMessenger.Default.Send(new SendInAppNotificationMessage(new Notification
+                {
+                    Severity = InfoBarSeverity.Error,
+                    Title = "Sign-in failed",
+                    Message = error,
+                    Duration = TimeSpan.FromSeconds(30),
+                }));
             }
         }
         catch (OperationCanceledException)

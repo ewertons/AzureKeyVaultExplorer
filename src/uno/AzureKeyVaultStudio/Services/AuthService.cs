@@ -174,6 +174,7 @@ public class AuthService
     public async Task<AuthenticationResult?> LoginAsync(CancellationToken cancellationToken)
     {
         AuthenticationResult authenticationResult;
+        LastLoginError = null;
         try
         {
             var options = new SystemWebViewOptions()
@@ -185,20 +186,14 @@ public class AuthService
             // Consent to ARM and Key Vault up front; otherwise the later silent token requests fail with
             // AADSTS65001 in tenants where nobody has consented yet. This is safe for personal accounts because
             // the authority is always "organizations" or a specific tenant, never /consumers or /common.
-            authenticationResult = await authenticationClient.AcquireTokenInteractive(Constants.Scopes)
-                .WithExtraScopesToConsent(Constants.ConsentScopes)
+            authenticationResult = await authenticationClient.AcquireTokenInteractive(Constants.InteractiveLoginScopes)
+                .WithExtraScopesToConsent(Constants.InteractiveLoginExtraConsentScopes)
                 .ExecuteAsync(cancellationToken);
 
             IsAuthenticated = true;
             TenantName = authenticationResult.Account.Username.Split("@").TakeLast(1).Single();
             TenantId = authenticationResult.TenantId;
-            AuthenticatedUserClaims = new AuthenticatedUserClaims()
-            {
-                Username = authenticationResult.Account.Username,
-                TenantId = authenticationResult.TenantId,
-                Name = authenticationResult.ClaimsPrincipal.Identities.First().FindFirst("name").Value,
-                Email = authenticationResult.ClaimsPrincipal.Identities.First().FindFirst("preferred_username").Value
-            };
+            TransformClaims(authenticationResult);
 
             // set the preferences/settings of the signed in account
             //IAccount cachedUserAccount = Task.Run(async () => await PublicClientSingleton.Instance.MSALClientHelper.FetchSignedInUserFromCache()).Result;
@@ -218,7 +213,17 @@ public class AuthService
             Debug.WriteLine(ex);
             return null;
         }
+        catch (MsalServiceException ex)
+        {
+            // Errors returned by Entra ID (e.g. AADSTS codes). Unhandled, these crash the app in Release builds.
+            _logger.LogError(ex, "Interactive authentication failed.");
+            LastLoginError = ex.Message;
+            return null;
+        }
     }
+
+    /// <summary>Message of the last Entra ID error returned by <see cref="LoginAsync"/>, if any.</summary>
+    public string? LastLoginError { get; private set; }
 
     public async Task<AuthenticationResult?> RefreshTokenAsync(CancellationToken cancellationToken)
     {
